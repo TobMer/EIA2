@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Charactereditor</title>
+	<link rel="stylesheet" href="CocktailBar.css" type="text/css" media="screen" />
+	<script src="GenerateContent.js" type="text/javascript" charset="utf-8"></script>
+	<script src="items.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<header>
+		<h1>Charactereditor</h1>
+		<p>Erstelle deinen Charakter und erlebe neue Abenteuer!</p>
+	</header>
+
+	<form id="form">
+ <div>
+			<h2>Wähle dein Item</h2>
+			<fieldset id="accessoires">
+				<legend>Accessoires</legend>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Gewicht</legend>
+			
+					<span>
+					kg
+						<input name="Amount" id="amount" min="0.1" max="1.0" value="0.1">
+						1.0 kg
+					</span>
+					<progress max="1.0" value="0.1" />
+				</span>
+			</fieldset>
+		</div> 
+	</form>
+
+	<div>
+		<h2>Dein Charakter</h2>
+		<div id="order">
+			
+		</div>
+		<button type="reset" form="form">zurücksetzen</button>
+		<button type="button" form="form">Einstellungen speichern</button>
+	</div>
+
+</body>
+
+</html>
