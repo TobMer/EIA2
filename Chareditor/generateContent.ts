@@ -20,7 +20,7 @@ namespace Charactereditor {
     }
     function generateContent(_accessoires: Category): void {
         for (let key in _accessoires) {
-           
+           let key: string = _accessoires ="[value"
         }
     }
 
