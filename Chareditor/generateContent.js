@@ -14,6 +14,7 @@ var Charactereditor;
     }
     function generateContent(_accessoires) {
         for (let key in _accessoires) {
+            let key = _accessoires = "[value";
         }
     }
     function handlechange() {

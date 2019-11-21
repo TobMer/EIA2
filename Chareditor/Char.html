@@ -12,37 +12,42 @@
 <body>
 	<header>
 		<h1>Charactereditor</h1>
-		<p>Erstelle deinen Charakter und erlebe neue Abenteuer!</p>
+		<p>Choose a drink and the extras. Select the size of your cocktail. Verify your order on the right.</p>
 	</header>
 
 	<form id="form">
- <div>
-			<h2>Wähle dein Item</h2>
-			<fieldset id="accessoires">
-				<legend>Accessoires</legend>
+		<div>
+			<h2>Choose here</h2>
+			<fieldset id="Drink">
+				<legend>Drink</legend>
 			</fieldset>
-			
+			<fieldset id="Container">
+				<legend>Container</legend>
+			</fieldset>
+			<fieldset id="Extras">
+				<legend>Extras</legend>
+			</fieldset>
 			<fieldset>
-				<legend>Gewicht</legend>
-			
+				<legend>Amount</legend>
+				<span id="slider">
 					<span>
-					kg
-						<input name="Amount" id="amount" min="0.1" max="1.0" value="0.1">
-						1.0 kg
+						0.1 L
+						<input type="range" name="Amount" id="amount" min="0.1" max="1.0" step="0.1" value="0.1">
+						1.0 L
 					</span>
 					<progress max="1.0" value="0.1" />
 				</span>
 			</fieldset>
-		</div> 
+		</div>
 	</form>
 
 	<div>
-		<h2>Dein Charakter</h2>
+		<h2>Your order</h2>
 		<div id="order">
-			
+			...
 		</div>
-		<button type="reset" form="form">zurücksetzen</button>
-		<button type="button" form="form">Einstellungen speichern</button>
+		<button type="reset" form="form">Reset</button>
+		<button type="button" form="form">Order</button>
 	</div>
 
 </body>
