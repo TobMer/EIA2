@@ -1,7 +1,7 @@
 namespace L02_BlackmailerCompanion {
 
     console.log("Start");
-    let chosenCharacter: string;
+    // let chosenCharacter: string;
     window.addEventListener("load", handleLoad);
 
     function handleLoad(_event: Event): void {
@@ -15,13 +15,13 @@ namespace L02_BlackmailerCompanion {
     function placeLetter(_event: MouseEvent): void {
 
         console.log(_event);
-let x: number = _event
+      
     }
     function chooseCharacter(_event: KeyboardEvent): void {
 
         // console.log(_event);
 
-        chosenCharacter = _event.key;
+        // chosenCharacter = _event.key;
 }
 }
 

@@ -13,17 +13,19 @@ var Charactereditor;
         button.addEventListener("click", handleclick);
     }
     function generateContent(_accessoires) {
-        for (let key in _accessoires) {
-            let key = _accessoires = "[value";
-        }
+        // for (let key in _accessoires) {
+        //    let key: string = _accessoires ="[value"
+        // }
     }
     function handlechange() {
         console.log("click");
-        let formData;
+        //    let formData
     }
     function handleinput() {
+        //
     }
     function handleclick() {
+        //
     }
 })(Charactereditor || (Charactereditor = {}));
 //# sourceMappingURL=generateContent.js.map
