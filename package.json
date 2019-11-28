@@ -4,18 +4,18 @@
   "description": "Control for the heroku implementation",
   "main": "",
   "scripts": {
-    "start": "node X01_Appendix/Code/L06_Server/CocktailBar/Server/Server.js"
+    "start": "node Aufgabe06/server/server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JirkaDellOro/EIA2-Inverted.git"
+    "url": "git+https://github.com/TobMer/EIA2.git"
   },
-  "author": "Jirka R. Dell'Oro-Friedl",
+  "author": "Tobias Merkle",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JirkaDellOro/EIA2-Inverted/issues"
+    "url": "https://github.com/TobMer/EIA2/issues"
   },
-  "homepage": "https://github.com/JirkaDellOro/EIA2-Inverted#readme",
+  "homepage": "",
   "dependencies": {
     "@types/mongodb": "^3.3.1",
     "@types/node": "^12.12.11",
