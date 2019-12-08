@@ -3,9 +3,9 @@ namespace L06_CocktailBar {
     window.addEventListener("load", handleLoad);
     // const url: string = "index.html";
     let form: HTMLFormElement;
-    //const url: string = "https://eia2-inverted-dev.herokuapp.com";
+    let url: string = "https://fiepsonet.herokuapp.com";
 
-    let url: string = "http://localhost:5001";
+    // let url: string = "http://localhost:5001";
 
     async function handleLoad(_event: Event): Promise<void> {
         console.log("Init");

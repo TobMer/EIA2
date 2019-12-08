@@ -1,0 +1,113 @@
+"use strict";
+var l08aufgabe;
+(function (l08aufgabe) {
+    window.addEventListener("load", handleLoad);
+    let crc2;
+    let golden = 0.62;
+    function handleLoad(_event) {
+        let canvas = document.querySelector("canvas");
+        if (!canvas)
+            return;
+        crc2 = canvas.getContext("2d");
+        zeichneHintergrund();
+        zeichneSonne({ x: 100, y: 75 });
+        zeichneWolke({ x: 500, y: 175 }, { x: 250, y: 150 });
+        zeichneSchneemann({ x: 175, y: 575 });
+        zeichneHut({ x: 175, y: 575 });
+        zeichnevogelhaus({ x: 600, y: 425 });
+    }
+    //HIntergrund
+    function zeichneHintergrund() {
+        console.log("Hintergrund");
+        let gradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
+        gradient.addColorStop(0, "lightblue");
+        gradient.addColorStop(golden, "white");
+        gradient.addColorStop(1, "HSL(160, 60%, 30%)");
+        crc2.fillStyle = gradient;
+        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+    }
+    function zeichneSonne(_position) {
+        console.log("Sonne", _position);
+        let r1 = 30;
+        let r2 = 150;
+        let gradient = crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
+        gradient.addColorStop(0, "HSLA(60, 100%, 40%, 1)"); //Sonne
+        gradient.addColorStop(1, "HSLA(60, 100%, 90%, 0)"); //Corona
+        crc2.save();
+        crc2.translate(_position.x, _position.y);
+        crc2.fillStyle = gradient;
+        crc2.arc(0, 0, r2, 0, 2 * Math.PI);
+        crc2.fill();
+        crc2.restore();
+    }
+    function zeichneWolke(_position, _size) {
+        console.log("Wolke", _position, _size);
+        let nParticles = 70;
+        let radiusParticle = 70;
+        let particle = new Path2D();
+        let gradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
+        particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI); // Farbe und Radius des PArtikels. Einer
+        gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");
+        gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
+        crc2.save();
+        crc2.translate(_position.x, _position.y);
+        crc2.fillStyle = gradient;
+        for (let drawn = 0; drawn < nParticles; drawn++) {
+            crc2.save();
+            let x = (Math.random() - 0.5) * _size.x;
+            let y = -(Math.random() * _size.y);
+            crc2.translate(x, y);
+            crc2.fill(particle);
+            crc2.restore();
+        }
+        crc2.restore();
+    }
+    function zeichneSchneemann(_position, _position2) {
+        let path = new Path2D();
+        path.arc(175, 555, 40, 0, 2 * Math.PI);
+        crc2.stroke(path);
+        path.arc(175, 485, 30, 0, 2 * Math.PI);
+        crc2.stroke(path);
+        path.arc(175, 435, 20, 0, 2 * Math.PI);
+        crc2.stroke(path);
+        drawCircle("#000", 200, 160, 3);
+    }
+    function drawCircle(color, x, y, radius) {
+        crc2.strokeStyle = crc2.fillStyle = color;
+        crc2.beginPath();
+        crc2.arc(175, 500, radius, 0, Math.PI * 2, true);
+        crc2.arc(175, 485, radius, 0, Math.PI * 2, true);
+        crc2.arc(175, 470, radius, 0, Math.PI * 2, true);
+        crc2.stroke();
+        crc2.fill();
+        crc2.closePath();
+    }
+    function zeichneHut(_position, _position2) {
+        crc2.beginPath();
+        crc2.fillStyle = "black";
+        crc2.fillRect(150, 360, 50, 60);
+        crc2.fillRect(130, 410, 90, 10);
+    }
+    function zeichnevogelhaus(_position, _size) {
+        console.log("vogelhaus", _position, _size);
+        //Stützstab
+        crc2.beginPath();
+        crc2.moveTo(600, 365);
+        crc2.lineTo(600, 625);
+        crc2.closePath(); //verbindet den ersten und letzten Punkt, dadurch schließt er den Pfad
+        crc2.stroke();
+        crc2.beginPath();
+        crc2.fillStyle = "black";
+        //Kästchen
+        crc2.fillRect(550, 310, 100, 100);
+        crc2.clearRect(550, 345, 100, 60);
+        //Dach
+        crc2.beginPath();
+        crc2.moveTo(550, 310);
+        crc2.lineTo(650, 310);
+        crc2.lineTo(600, 270);
+        crc2.closePath();
+        crc2.stroke();
+    }
+})(l08aufgabe || (l08aufgabe = {}));
+//# sourceMappingURL=aufgabe08.js.map

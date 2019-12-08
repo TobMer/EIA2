@@ -26,4 +26,4 @@ var L06_CocktailBar;
         _response.end();
     }
 })(L06_CocktailBar = exports.L06_CocktailBar || (exports.L06_CocktailBar = {}));
-//# sourceMappingURL=Server.js.map
+//# sourceMappingURL=server.js.map

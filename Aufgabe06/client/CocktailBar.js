@@ -4,8 +4,8 @@ var L06_CocktailBar;
     window.addEventListener("load", handleLoad);
     // const url: string = "index.html";
     let form;
-    //const url: string = "https://eia2-inverted-dev.herokuapp.com";
-    let url = "http://localhost:5001";
+    let url = "https://fiepsonet.herokuapp.com";
+    // let url: string = "http://localhost:5001";
     async function handleLoad(_event) {
         console.log("Init");
         let response = await fetch("Data.json");
