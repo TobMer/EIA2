@@ -3,7 +3,7 @@ namespace l08canvasübung {
         x: number;
         y: number;
     }
-
+        
     window.addEventListener("load", handleLoad);
     let crc2: CanvasRenderingContext2D;
     let golden: number = 0.62; //Für Goldenen Schnitt. ALso die ungefähre mitte des Bildes.
