@@ -24,7 +24,7 @@ namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zw
         zeichneBerge({ x: 0, y: crc2.canvas.height * golden }, 75, 200, "white", "grey");
         zeichneBerge({ x: 0, y: crc2.canvas.height * golden }, 50, 150, "lightgrey", "grey"); //zeichnet nochmal Berge
         zeichneBaum();
-        zeichneHut({ x: 175, y: 575 });
+        zeichneHut();
         zeichnevogelhaus({ x: 600, y: 425 });
         zeichneVögel({ x: 0, y: 500 }, { x: 600, y: 600 });
         zeichneschneeflocken({ x: 0, y: 600 }, { x: 800, y: 600 });
@@ -99,12 +99,12 @@ namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zw
     }
 
 
-    function zeichneBerge(_position, _min, _max, _colorHigh, _colorLow) {
+    function zeichneBerge(_position: Vector, _min: number, _max: number, _colorHigh: string, _colorLow: string): void {
         console.log("Mountains" + _position, _min, _max, _colorHigh, _colorLow);
         console.log("Mountains");
-        let stepMin = 50;
-        let stepMax = 80;
-        let x = 0;
+        let stepMin: number = 50;
+        let stepMax: number = 80;
+        let x: number = 0;
         crc2.save();
         crc2.translate(_position.x, _position.y);
         crc2.beginPath();
@@ -112,12 +112,12 @@ namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zw
         crc2.lineTo(0, -_max);
         do {
             x += stepMin + Math.random() * (stepMax - stepMin);
-            let y = -_min - Math.random() * (_max - _min);
+            let y: number = -_min - Math.random() * (_max - _min);
             crc2.lineTo(x, y);
         } while (x < crc2.canvas.width);
         crc2.lineTo(x, 0);
         crc2.closePath();
-        let gradient = crc2.createLinearGradient(0, 0, 0, -_max);
+        let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, -_max);
         gradient.addColorStop(0, _colorLow);
         gradient.addColorStop(0.7, _colorHigh);
         crc2.fillStyle = gradient;
@@ -133,42 +133,38 @@ namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zw
         let transform: DOMMatrix = crc2.getTransform();
 
         // let x: number = Math.random() * 800;
-        let nBranches: number = 50;
-        let maxRadius: number = 60;
-        let branch: Path2D = new Path2D();
-        branch.arc(500, 470, maxRadius, 0, 2 * Math.PI);
+        let blätterZahl: number = 70;
+        let maxRadius: number = 66;
+        let blätter: Path2D = new Path2D();
+        blätter.arc(500, 450, maxRadius, 0, 2 * Math.PI);
 
-        crc2.fillStyle = "HSL(30, 70%, 40%)"; // Baumstamm
-        crc2.fillRect(500, 450, 20, -100);
+        // Baumstamm
+        crc2.fillStyle = "HSL(30, 80%, 30%)"; 
+        crc2.fillRect(460, 450, 100, -200);
         crc2.save();
         crc2.translate(0, -120);
 
         do {
-            let y: number = Math.random() * 150;
-            let x: number = (Math.random() - 0.5) * 2 * maxRadius;
+            let y: number = Math.random() * 190; // Höhe der Blätter
+            let x: number = (Math.random() - 0.5) * 2 * maxRadius; // Radius der Kreise und Blätter
 
             crc2.save();
-            crc2.translate(0, -y);
-            crc2.translate(x, 0);
+            crc2.translate(x, -y);
 
-            let colorAngle: number = 120 - Math.random() * 60;
-            let color: string = "HSLA(" + colorAngle + ", 50%, 60%, 0.5)";
+            let colorAngle: number = 123 - Math.random() * 60; // Farbe der Blätter
+            let color: string = "HSLA(" + colorAngle + ", 50%, 30%, 0.5)";
 
             crc2.fillStyle = color;
-            crc2.fill(branch);
+            crc2.fill(blätter);
             crc2.restore();
-        } while (--nBranches > 0);
+        } while (--blätterZahl > 0);
 
         crc2.restore();
         crc2.setTransform(transform);
-
-
-
     }
 
 
     function zeichneSchneemann(_position: Vector): void {
-
 
 
         crc2.save();
@@ -200,12 +196,12 @@ namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zw
         crc2.strokeStyle = "black"; // schwarze umrandung
         crc2.stroke(path); // Führt es aus
         path = new Path2D();
-        drawCircle("#000", 200, 160, 3);
+        drawCircle("#000", 3);
         crc2.restore();
     }
 
 
-    function drawCircle(color: string, x: number, y: number, radius) {
+    function drawCircle(color: string, radius: number): void {
         crc2.strokeStyle = crc2.fillStyle = color;
         crc2.beginPath();
 
@@ -219,13 +215,14 @@ namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zw
 
     }
 
-    function zeichneHut(_position: Vector) {
+    function zeichneHut(): void {
 
         crc2.beginPath();
         crc2.fillStyle = "black";
         crc2.fillRect(150, 360, 50, 60);
         crc2.fillRect(130, 410, 90, 10);
-        let nose = new Path2D;
+
+        let nose: Path2D = new Path2D;
         nose.arc(175, 442, 3, 0, 2 * Math.PI);
         crc2.fillStyle = "orange";
         crc2.fill(nose);
@@ -233,8 +230,8 @@ namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zw
 
     }
 
-    function zeichnevogelhaus(_position: Vector, _size: Vector): void { // Sieht echt nicht nach eins aus aber ich hab mir mühe gegeben hehe
-        console.log("vogelhaus", _position, _size);
+    function zeichnevogelhaus(_position: Vector): void { // Sieht echt nicht nach eins aus aber ich hab mir mühe gegeben hehe
+        console.log("vogelhaus", _position);
 
         //Stützstab
 
@@ -255,15 +252,13 @@ namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zw
         crc2.fillStyle = "HSL(230, 70%, 50%)";
         crc2.fillRect(550, 310, 100, 100);
         //Loch
-        let loch = new Path2D;
+        let loch: Path2D = new Path2D;
         loch.arc(600, 370, 15, 0, 2 * Math.PI);
         crc2.fillStyle = "black";
         crc2.fill(loch);
         crc2.stroke(loch);
 
         //Dach
-
-        let dach = new Path2D;
 
         crc2.beginPath();
         crc2.moveTo(530, 310);
@@ -294,18 +289,18 @@ namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zw
         crc2.save();
         crc2.translate(_position.x, _position.y);
 
-        for (let drawn = 0; drawn < nVögel; drawn++) {
+        for (let drawn: number = 0; drawn < nVögel; drawn++) {
 
-            let colorAngle = 120 - Math.random() * 290;
-            let color = "HSLA(" + colorAngle + ", 90%, 50 %, 0.7)";
-            let scale = 0.7 + Math.random() * 1;
+            let farbgrad: number = 120 - Math.random() * 60;
+            let color: string = "HSLA(" + farbgrad + ", 100%, 59%, 0.7)";
+            // let scale: number = 0.7 + Math.random() * 1;
 
             crc2.fillStyle = color;
             crc2.save();
             let x: number = Math.random() * _size.x;
             let y: number = - (Math.random() * _size.y);
             crc2.translate(x, y);
-            crc2.transform(scale, 0, 0, scale, 0, 0);
+            // crc2.transform(scale, 0, 0, scale, 0, 0);
             crc2.fill(vogel);
             crc2.restore();
             crc2.fillStyle = "green";

@@ -16,7 +16,7 @@ var l08aufgabe;
         zeichneBerge({ x: 0, y: crc2.canvas.height * golden }, 75, 200, "white", "grey");
         zeichneBerge({ x: 0, y: crc2.canvas.height * golden }, 50, 150, "lightgrey", "grey"); //zeichnet nochmal Berge
         zeichneBaum();
-        zeichneHut({ x: 175, y: 575 });
+        zeichneHut();
         zeichnevogelhaus({ x: 600, y: 425 });
         zeichneVögel({ x: 0, y: 500 }, { x: 600, y: 600 });
         zeichneschneeflocken({ x: 0, y: 600 }, { x: 800, y: 600 });
@@ -96,26 +96,26 @@ var l08aufgabe;
         console.log("Tree");
         let transform = crc2.getTransform();
         // let x: number = Math.random() * 800;
-        let nBranches = 50;
-        let maxRadius = 60;
-        let branch = new Path2D();
-        branch.arc(500, 470, maxRadius, 0, 2 * Math.PI);
-        crc2.fillStyle = "HSL(30, 70%, 40%)"; // Baumstamm
-        crc2.fillRect(500, 450, 20, -100);
+        let blätterZahl = 70;
+        let maxRadius = 66;
+        let blätter = new Path2D();
+        blätter.arc(500, 450, maxRadius, 0, 2 * Math.PI);
+        // Baumstamm
+        crc2.fillStyle = "HSL(30, 80%, 30%)";
+        crc2.fillRect(460, 450, 100, -200);
         crc2.save();
         crc2.translate(0, -120);
         do {
-            let y = Math.random() * 150;
-            let x = (Math.random() - 0.5) * 2 * maxRadius;
+            let y = Math.random() * 190; // Höhe der Blätter
+            let x = (Math.random() - 0.5) * 2 * maxRadius; // Radius der Kreise und Blätter
             crc2.save();
-            crc2.translate(0, -y);
-            crc2.translate(x, 0);
-            let colorAngle = 120 - Math.random() * 60;
-            let color = "HSLA(" + colorAngle + ", 50%, 60%, 0.5)";
+            crc2.translate(x, -y);
+            let colorAngle = 123 - Math.random() * 60; // Farbe der Blätter
+            let color = "HSLA(" + colorAngle + ", 50%, 30%, 0.5)";
             crc2.fillStyle = color;
-            crc2.fill(branch);
+            crc2.fill(blätter);
             crc2.restore();
-        } while (--nBranches > 0);
+        } while (--blätterZahl > 0);
         crc2.restore();
         crc2.setTransform(transform);
     }
@@ -143,10 +143,10 @@ var l08aufgabe;
         crc2.strokeStyle = "black"; // schwarze umrandung
         crc2.stroke(path); // Führt es aus
         path = new Path2D();
-        drawCircle("#000", 200, 160, 3);
+        drawCircle("#000", 3);
         crc2.restore();
     }
-    function drawCircle(color, x, y, radius) {
+    function drawCircle(color, radius) {
         crc2.strokeStyle = crc2.fillStyle = color;
         crc2.beginPath();
         crc2.arc(175, 500, radius, 0, Math.PI * 2, true);
@@ -155,7 +155,7 @@ var l08aufgabe;
         crc2.stroke();
         crc2.fill();
     }
-    function zeichneHut(_position) {
+    function zeichneHut() {
         crc2.beginPath();
         crc2.fillStyle = "black";
         crc2.fillRect(150, 360, 50, 60);
@@ -166,8 +166,8 @@ var l08aufgabe;
         crc2.fill(nose);
         crc2.stroke(nose);
     }
-    function zeichnevogelhaus(_position, _size) {
-        console.log("vogelhaus", _position, _size);
+    function zeichnevogelhaus(_position) {
+        console.log("vogelhaus", _position);
         //Stützstab
         crc2.beginPath();
         crc2.fillStyle = "HSL(70, 70%, 15%)";
@@ -186,7 +186,6 @@ var l08aufgabe;
         crc2.fill(loch);
         crc2.stroke(loch);
         //Dach
-        let dach = new Path2D;
         crc2.beginPath();
         crc2.moveTo(530, 310);
         crc2.lineTo(670, 310);
@@ -207,15 +206,15 @@ var l08aufgabe;
         crc2.save();
         crc2.translate(_position.x, _position.y);
         for (let drawn = 0; drawn < nVögel; drawn++) {
-            let colorAngle = 120 - Math.random() * 290;
-            let color = "HSLA(" + colorAngle + ", 90%, 50 %, 0.7)";
-            let scale = 0.7 + Math.random() * 1;
+            let farbgrad = 120 - Math.random() * 60;
+            let color = "HSLA(" + farbgrad + ", 100%, 59%, 0.7)";
+            // let scale: number = 0.7 + Math.random() * 1;
             crc2.fillStyle = color;
             crc2.save();
             let x = Math.random() * _size.x;
             let y = -(Math.random() * _size.y);
             crc2.translate(x, y);
-            crc2.transform(scale, 0, 0, scale, 0, 0);
+            // crc2.transform(scale, 0, 0, scale, 0, 0);
             crc2.fill(vogel);
             crc2.restore();
             crc2.fillStyle = "green";
