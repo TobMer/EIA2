@@ -1,4 +1,5 @@
-namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zwar kam des etwas spät aber über ein Feedback freue ich mich
+namespace aufgabe09 {
+
     interface Vector {
         x: number;
         y: number;
@@ -27,7 +28,7 @@ namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zw
         zeichneHut();
         zeichnevogelhaus();
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
-        zeichneschneeflocken({ x: 0, y: 600 }, { x: 800, y: 600 });
+        drawSnowflakes({ x: 0, y: 600 }, { x: 800, y: 600 });
     }
 
 
@@ -322,7 +323,7 @@ namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zw
 
     }
 
-    function zeichneschneeflocken(_position: Vector, _size: Vector): void {
+    function drawSnowflakes(_position: Vector, _size: Vector): void {
         let nParticles: number = 244;
         let radiusParticle: number = 5;
         let particle: Path2D = new Path2D();
@@ -348,5 +349,5 @@ namespace l08aufgabe {  // ich habe mein bestes getan und hab ewig gebraucht. Zw
 
     }
 
-}
 
+}
