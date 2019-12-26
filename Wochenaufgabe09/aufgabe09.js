@@ -19,7 +19,8 @@ var aufgabe09;
         zeichneHut();
         zeichnevogelhaus();
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
-        drawSnowflakes({ x: 0, y: 600 }, { x: 800, y: 600 });
+        zeichneschneeflocken({ x: 0, y: 600 }, { x: 800, y: 600 });
+        let snowflakes = [];
     }
     //HIntergrund
     function zeichneHintergrund() {
@@ -231,7 +232,7 @@ var aufgabe09;
         }
         crc2.restore();
     }
-    function drawSnowflakes(_position, _size) {
+    function zeichneschneeflocken(_position, _size) {
         let nParticles = 244;
         let radiusParticle = 5;
         let particle = new Path2D();

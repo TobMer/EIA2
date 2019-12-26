@@ -1,5 +1,4 @@
-namespace aufgabe09 {
-
+namespace aufgabe09 {  // ich habe mein bestes getan und hab ewig gebraucht. Zwar kam des etwas spät aber über ein Feedback freue ich mich
     interface Vector {
         x: number;
         y: number;
@@ -28,7 +27,11 @@ namespace aufgabe09 {
         zeichneHut();
         zeichnevogelhaus();
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
-        drawSnowflakes({ x: 0, y: 600 }, { x: 800, y: 600 });
+        zeichneschneeflocken({ x: 0, y: 600 }, { x: 800, y: 600 });
+
+        let snowflakes: Snowflake[] = [];
+        
+        
     }
 
 
@@ -323,7 +326,7 @@ namespace aufgabe09 {
 
     }
 
-    function drawSnowflakes(_position: Vector, _size: Vector): void {
+    function zeichneschneeflocken(_position: Vector, _size: Vector): void {
         let nParticles: number = 244;
         let radiusParticle: number = 5;
         let particle: Path2D = new Path2D();
@@ -349,5 +352,5 @@ namespace aufgabe09 {
 
     }
 
-
 }
+
