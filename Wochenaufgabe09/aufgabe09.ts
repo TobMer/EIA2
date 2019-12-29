@@ -1,4 +1,4 @@
-namespace aufgabe09 {  // ich habe mein bestes getan und hab ewig gebraucht. Zwar kam des etwas spät aber über ein Feedback freue ich mich
+namespace aufgabe09 {
     interface Vector {
         x: number;
         y: number;
@@ -7,6 +7,10 @@ namespace aufgabe09 {  // ich habe mein bestes getan und hab ewig gebraucht. Zwa
     window.addEventListener("load", handleLoad);
     let crc2: CanvasRenderingContext2D;
     let golden: number = 0.62;
+
+
+    let snowflakes: Snowflake[] = [];
+
 
 
     function handleLoad(_event: Event): void {
@@ -27,11 +31,11 @@ namespace aufgabe09 {  // ich habe mein bestes getan und hab ewig gebraucht. Zwa
         zeichneHut();
         zeichnevogelhaus();
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
-        zeichneschneeflocken({ x: 0, y: 600 }, { x: 800, y: 600 });
+        drawSnowflake();
 
-        let snowflakes: Snowflake[] = [];
-        
-        
+
+
+        window.setInterval(update, 20, zeichneHintergrund);
     }
 
 
@@ -280,10 +284,10 @@ namespace aufgabe09 {  // ich habe mein bestes getan und hab ewig gebraucht. Zwa
         let bird: Path2D = new Path2D();
         let nBirds: number = 21;
         let radiusBird: number = 24 + Math.random() * 10;
-        
+
         let colorgrade: number = 120 - Math.random() * 60;
         let color: string = "HSLA(" + colorgrade + ", 100%, 59%, 1)";
-        
+
         crc2.fillStyle = color;
 
         bird.ellipse(0, 0, 1 / 2 * radiusBird, radiusBird, 30, 0, 2 * Math.PI); // Körper der Vögel
@@ -294,12 +298,12 @@ namespace aufgabe09 {  // ich habe mein bestes getan und hab ewig gebraucht. Zwa
         bird.closePath();
         // crc2.fill(bird);
 
-        
+
 
         bird.moveTo(40, -8);
         bird.lineTo(60, -16);
         bird.lineTo(40, -20);
-     
+
 
         bird.arc(30, -8, (1 / 2) * radiusBird, 0, 2 * Math.PI);
         // vogel.ellipse(5, -5, (1 / 3) * radiusVogel, radiusVogel, 13, 0, 2 * Math.PI);
@@ -326,31 +330,33 @@ namespace aufgabe09 {  // ich habe mein bestes getan und hab ewig gebraucht. Zwa
 
     }
 
-    function zeichneschneeflocken(_position: Vector, _size: Vector): void {
-        let nParticles: number = 244;
-        let radiusParticle: number = 5;
-        let particle: Path2D = new Path2D();
-        let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
+    function drawSnowflake(): void {
 
-        particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-        gradient.addColorStop(0, "HSLA(0, 100%, 100%, 1)");
-        gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
+        console.log("snowflake");
+        let nSnowflake: number = 100;
 
-        crc2.save();
-        crc2.translate(_position.x, _position.y);
-        crc2.fillStyle = gradient;
-
-        for (let drawn: number = 0; drawn < nParticles; drawn++) {
-            crc2.save();
-            let x: number = Math.random() * _size.x;
-            let y: number = - (Math.random() * _size.y);
-            crc2.translate(x, y);
-            crc2.fill(particle);
-            crc2.restore();
-
+        for (let i: number = 0; i < nSnowflake; i++) {
+            let snowflake: Snowflake = new Snowflake();
+            snowflakes.push(snowflake);
         }
 
+
     }
+
+
+    function update(_backgroundData: ImageData): void {
+        console.log("Update!");
+
+        crc2.putImageData(_backgroundData, 0, 0);
+
+        for (let snowflakes of snowflake) {
+            snowflakes.move(1);
+            snowflakes.draw();
+
+        }
+    }
+
+
 
 }
 

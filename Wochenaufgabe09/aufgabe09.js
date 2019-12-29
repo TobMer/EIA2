@@ -4,6 +4,7 @@ var aufgabe09;
     window.addEventListener("load", handleLoad);
     let crc2;
     let golden = 0.62;
+    let snowflakes = [];
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -19,8 +20,8 @@ var aufgabe09;
         zeichneHut();
         zeichnevogelhaus();
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
-        zeichneschneeflocken({ x: 0, y: 600 }, { x: 800, y: 600 });
-        let snowflakes = [];
+        drawSnowflake();
+        window.setInterval(update, 20, zeichneHintergrund);
     }
     //HIntergrund
     function zeichneHintergrund() {
@@ -232,24 +233,20 @@ var aufgabe09;
         }
         crc2.restore();
     }
-    function zeichneschneeflocken(_position, _size) {
-        let nParticles = 244;
-        let radiusParticle = 5;
-        let particle = new Path2D();
-        let gradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
-        particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-        gradient.addColorStop(0, "HSLA(0, 100%, 100%, 1)");
-        gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
-        crc2.save();
-        crc2.translate(_position.x, _position.y);
-        crc2.fillStyle = gradient;
-        for (let drawn = 0; drawn < nParticles; drawn++) {
-            crc2.save();
-            let x = Math.random() * _size.x;
-            let y = -(Math.random() * _size.y);
-            crc2.translate(x, y);
-            crc2.fill(particle);
-            crc2.restore();
+    function drawSnowflake() {
+        console.log("snowflake");
+        let nSnowflake = 100;
+        for (let i = 0; i < nSnowflake; i++) {
+            let snowflake = new aufgabe09.Snowflake();
+            snowflakes.push(snowflake);
+        }
+    }
+    function update(_backgroundData) {
+        console.log("Update!");
+        crc2.putImageData(_backgroundData, 0, 0);
+        for (let snowflakes of snowflake) {
+            snowflakes.move(1);
+            snowflakes.draw();
         }
     }
 })(aufgabe09 || (aufgabe09 = {}));

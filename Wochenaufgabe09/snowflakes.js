@@ -20,8 +20,8 @@ var aufgabe09;
             crc2.save();
             crc2.translate(this.position.x, this.position.y);
             crc2.arc(0, 0, 5, 0, 2 * Math.PI);
-            crc2.fill();
             crc2.fillStyle = "white";
+            crc2.fill();
             crc2.restore();
             crc2.closePath();
         }
