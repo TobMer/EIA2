@@ -20,8 +20,8 @@ var aufgabe09;
         zeichneHut();
         zeichnevogelhaus();
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
+        //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
         drawSnowflake();
-        window.setInterval(update, 20, zeichneHintergrund);
     }
     //HIntergrund
     function zeichneHintergrund() {
@@ -237,16 +237,17 @@ var aufgabe09;
         console.log("snowflake");
         let nSnowflake = 100;
         for (let i = 0; i < nSnowflake; i++) {
-            let snowflake = new aufgabe09.Snowflake();
+            let snowflake = new aufgabe09.Snowflakes();
             snowflakes.push(snowflake);
         }
-    }
-    function update(_backgroundData) {
-        console.log("Update!");
-        crc2.putImageData(_backgroundData, 0, 0);
-        for (let snowflakes of snowflake) {
-            snowflakes.move(1);
-            snowflakes.draw();
+        window.setInterval(update, 20, zeichneHintergrund);
+        function update(_backgroundData) {
+            console.log("Update!");
+            crc2.putImageData(_backgroundData, 0, 0);
+            for (let snowflakes of snowflake) {
+                snowflakes.move(1);
+                snowflakes.draw();
+            }
         }
     }
 })(aufgabe09 || (aufgabe09 = {}));

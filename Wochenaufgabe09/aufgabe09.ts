@@ -9,7 +9,7 @@ namespace aufgabe09 {
     let golden: number = 0.62;
 
 
-    let snowflakes: Snowflake[] = [];
+    let snowflakes: Snowflakes[] = [];
 
 
 
@@ -31,11 +31,16 @@ namespace aufgabe09 {
         zeichneHut();
         zeichnevogelhaus();
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
+        //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
         drawSnowflake();
 
 
 
-        window.setInterval(update, 20, zeichneHintergrund);
+
+
+
+
+
     }
 
 
@@ -235,7 +240,7 @@ namespace aufgabe09 {
 
     }
 
-    function zeichnevogelhaus(): void { // Sieht echt nicht nach eins aus aber ich hab mir mühe gegeben hehe
+    function zeichnevogelhaus(): void { // 
         console.log("vogelhaus");
 
         //Stützstab
@@ -336,27 +341,28 @@ namespace aufgabe09 {
         let nSnowflake: number = 100;
 
         for (let i: number = 0; i < nSnowflake; i++) {
-            let snowflake: Snowflake = new Snowflake();
+            let snowflake: Snowflakes = new Snowflakes();
             snowflakes.push(snowflake);
         }
+       
+       
+        window.setInterval(update, 20, zeichneHintergrund);
+        function update(_backgroundData: ImageData): void {
+            console.log("Update!");
 
+            crc2.putImageData(_backgroundData, 0, 0);
 
-    }
+            for (let snowflakes of snowflake) {
+                snowflakes.move(1);
+                snowflakes.draw();
 
-
-    function update(_backgroundData: ImageData): void {
-        console.log("Update!");
-
-        crc2.putImageData(_backgroundData, 0, 0);
-
-        for (let snowflakes of snowflake) {
-            snowflakes.move(1);
-            snowflakes.draw();
-
+            }
         }
+
+
+
     }
 
 
 
 }
-
