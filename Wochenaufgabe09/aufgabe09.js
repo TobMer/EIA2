@@ -22,6 +22,8 @@ var aufgabe09;
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
         drawSnowflake();
+        let background = crc2.getImageData(0, 0, 800, 600);
+        window.setInterval(update, 20, background);
     }
     //HIntergrund
     function zeichneHintergrund() {

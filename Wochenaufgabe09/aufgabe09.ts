@@ -29,21 +29,21 @@ namespace aufgabe09 {
         zeichneBerge({ x: 0, y: crc2.canvas.height * golden }, 50, 150, "lightgrey", "grey"); //zeichnet nochmal Berge
         zeichneBaum();
         zeichneHut();
-        
+
         zeichnevogelhaus();
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
         
+        
+
+ 
+
         drawSnowflake();
+        let background: ImageData = crc2.getImageData(0, 0, 800, 600);
+        window.setInterval(update, 20, background);
         
 
         
-
-
-
-
-
-
     }
 
 
