@@ -240,13 +240,15 @@ var aufgabe09;
             let snowflake = new aufgabe09.Snowflakes();
             snowflakes.push(snowflake);
         }
-        window.setInterval(update, 20, zeichneHintergrund);
-        function update(_backgroundData) {
-            console.log("Update!");
-            crc2.putImageData(_backgroundData, 0, 0);
-            for (let snowflakes of snowflake) {
-                snowflakes.move(1);
-                snowflakes.draw();
+        {
+            function update(_backgroundData) {
+                console.log("Update!");
+                void crc2.putImageData(_backgroundData, 0, 0);
+                void crc2.putImageData(_backgroundData, 0, 0, 0, 0, 0, 0);
+                for (let snowflakes of snowflake) {
+                    snowflakes.move(1);
+                    snowflakes.draw();
+                }
             }
         }
     }

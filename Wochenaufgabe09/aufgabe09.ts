@@ -29,12 +29,15 @@ namespace aufgabe09 {
         zeichneBerge({ x: 0, y: crc2.canvas.height * golden }, 50, 150, "lightgrey", "grey"); //zeichnet nochmal Berge
         zeichneBaum();
         zeichneHut();
+        
         zeichnevogelhaus();
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
+        
         drawSnowflake();
+        
 
-
+        
 
 
 
@@ -53,6 +56,8 @@ namespace aufgabe09 {
         gradient.addColorStop(0, "lightblue");
         gradient.addColorStop(golden, "white");
         gradient.addColorStop(1, "HSL(160, 60%, 30%)");
+
+
 
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
@@ -344,18 +349,19 @@ namespace aufgabe09 {
             let snowflake: Snowflakes = new Snowflakes();
             snowflakes.push(snowflake);
         }
-       
-       
-        window.setInterval(update, 20, zeichneHintergrund);
-        function update(_backgroundData: ImageData): void {
-            console.log("Update!");
 
-            crc2.putImageData(_backgroundData, 0, 0);
+        {
 
-            for (let snowflakes of snowflake) {
-                snowflakes.move(1);
-                snowflakes.draw();
 
+            function update(_backgroundData: ImageData): void {
+                console.log("Update!");
+
+                void crc2.putImageData(_backgroundData, 0, 0);
+                void crc2.putImageData(_backgroundData, 0, 0, 0, 0, 0, 0);
+                for (let snowflakes of snowflake) {
+                    snowflakes.move(1);
+                    snowflakes.draw();
+                }
             }
         }
 
