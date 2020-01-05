@@ -2,7 +2,7 @@
 namespace aufgabe09 {
 
 
-    export class Snowflakes {
+    export class Snowflake {
 
 
         position: Vector;

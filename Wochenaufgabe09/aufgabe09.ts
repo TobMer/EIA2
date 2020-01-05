@@ -9,7 +9,7 @@ namespace aufgabe09 {
     let golden: number = 0.62;
 
 
-    let snowflakes: Snowflakes[] = [];
+    let snowflakes: Snowflake[] = [];
 
 
 
@@ -356,7 +356,7 @@ namespace aufgabe09 {
         let nSnowflake: number = 100;
 
         for (let i: number = 0; i < nSnowflake; i++) {
-            let snowflake: Snowflakes = new Snowflakes();
+            let snowflake: Snowflake = new Snowflake();
             snowflakes.push(snowflake);
         }
     }
