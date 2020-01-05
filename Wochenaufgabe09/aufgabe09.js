@@ -242,17 +242,14 @@ var aufgabe09;
             let snowflake = new aufgabe09.Snowflakes();
             snowflakes.push(snowflake);
         }
-        {
-            function update(_backgroundData) {
-                console.log("Update!");
-                void crc2.putImageData(_backgroundData, 0, 0);
-                void crc2.putImageData(_backgroundData, 0, 0, 0, 0, 0, 0);
-                for (let snowflakes of snowflake) {
-                    snowflakes.move(1);
-                    snowflakes.draw();
-                }
-            }
-        }
     }
 })(aufgabe09 || (aufgabe09 = {}));
+function update(_backgroundData) {
+    console.log("Update!");
+    void crc2.putImageData(_backgroundData, 0, 0);
+    for (let snowflakes of snowflake) {
+        snowflakes.move(1);
+        snowflakes.draw();
+    }
+}
 //# sourceMappingURL=aufgabe09.js.map

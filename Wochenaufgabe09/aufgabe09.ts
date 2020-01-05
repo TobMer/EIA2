@@ -20,30 +20,40 @@ namespace aufgabe09 {
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
+
+
+
         zeichneHintergrund();
+
+
         zeichneSonne({ x: 100, y: 75 });
         zeichneWolke({ x: 500, y: 175 }, { x: 250, y: 150 });
 
         zeichneSchneemann({ x: 175, y: 560 });
         zeichneBerge({ x: 0, y: crc2.canvas.height * golden }, 75, 200, "white", "grey");
         zeichneBerge({ x: 0, y: crc2.canvas.height * golden }, 50, 150, "lightgrey", "grey"); //zeichnet nochmal Berge
+
+
+
         zeichneBaum();
         zeichneHut();
 
         zeichnevogelhaus();
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
-        //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
-        
-        
 
- 
+        //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
 
         drawSnowflake();
+
+
         let background: ImageData = crc2.getImageData(0, 0, 800, 600);
         window.setInterval(update, 20, background);
-        
 
-        
+
+
+
+
+
     }
 
 
@@ -349,26 +359,19 @@ namespace aufgabe09 {
             let snowflake: Snowflakes = new Snowflakes();
             snowflakes.push(snowflake);
         }
-
-        {
-
-
-            function update(_backgroundData: ImageData): void {
-                console.log("Update!");
-
-                void crc2.putImageData(_backgroundData, 0, 0);
-                void crc2.putImageData(_backgroundData, 0, 0, 0, 0, 0, 0);
-                for (let snowflakes of snowflake) {
-                    snowflakes.move(1);
-                    snowflakes.draw();
-                }
-            }
-        }
-
-
-
     }
+}
 
 
 
+
+function update(_backgroundData: ImageData): void {
+    console.log("Update!");
+
+    void crc2.putImageData(_backgroundData, 0, 0);
+
+    for (let snowflakes of snowflake) {
+        snowflakes.move(1);
+        snowflakes.draw();
+    }
 }
