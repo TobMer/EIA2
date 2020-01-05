@@ -9,7 +9,7 @@ namespace aufgabe09 {
     let golden: number = 0.62;
 
 
-    let snowflakes: Snowflake[] = [];
+    let snowflake: Snowflake[] = [];
 
 
 
@@ -357,7 +357,7 @@ namespace aufgabe09 {
 
         for (let i: number = 0; i < nSnowflake; i++) {
             let snowflake: Snowflake = new Snowflake();
-            snowflakes.push(snowflake);
+            snowflake.push(snowflake);
         }
     }
 }
@@ -370,8 +370,8 @@ function update(_backgroundData: ImageData): void {
 
     void crc2.putImageData(_backgroundData, 0, 0);
 
-    for (let snowflakes of snowflake) {
-        snowflakes.move(1);
-        snowflakes.draw();
+    for (let snowflake of snowflakes) {
+        snowflake.move(1);
+        snowflake.draw();
     }
 }
