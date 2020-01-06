@@ -51,7 +51,7 @@ namespace aufgabe09 {
 
 
 
-        window.setInterval(update, 20, background);
+        window.setInterval(update, 120, background);
 
 
     }
