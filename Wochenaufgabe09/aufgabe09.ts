@@ -367,9 +367,9 @@ namespace aufgabe09 {
 
         void crc2.putImageData(_backgroundData, 0, 0);
 
-        for (let snowflakes of snowflake) {
-            snowflakes.move(1);
-            snowflakes.draw();
+        for (let snowflake of snowflakes) {
+            snowflake.move(1);
+            snowflake.draw();
         }
     }
 
