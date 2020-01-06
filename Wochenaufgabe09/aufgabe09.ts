@@ -2,14 +2,13 @@ namespace aufgabe09 {
     interface Vector {
         x: number;
         y: number;
+
     }
 
     window.addEventListener("load", handleLoad);
-    let crc2: CanvasRenderingContext2D;
+    export let crc2: CanvasRenderingContext2D;
     let golden: number = 0.62;
-
-
-    let snowflake: Snowflake[] = [];
+    let snowflakes: Snowflake[] = [];
 
 
 
@@ -40,18 +39,19 @@ namespace aufgabe09 {
 
         zeichnevogelhaus();
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
+        drawSnowflake();
 
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
 
-        drawSnowflake();
+
 
 
         let background: ImageData = crc2.getImageData(0, 0, 800, 600);
+
+
+
+
         window.setInterval(update, 20, background);
-
-
-
-
 
 
     }
@@ -357,21 +357,22 @@ namespace aufgabe09 {
 
         for (let i: number = 0; i < nSnowflake; i++) {
             let snowflake: Snowflake = new Snowflake();
-            snowflake.push(snowflake);
+            snowflakes.push(snowflake);
         }
     }
-}
 
 
+    function update(_backgroundData: ImageData): void {
+        console.log("Update!");
 
+        void crc2.putImageData(_backgroundData, 0, 0);
 
-function update(_backgroundData: ImageData): void {
-    console.log("Update!");
-
-    void crc2.putImageData(_backgroundData, 0, 0);
-
-    for (let snowflake of snowflakes) {
-        snowflake.move(1);
-        snowflake.draw();
+        for (let snowflakes of snowflake) {
+            snowflakes.move(1);
+            snowflakes.draw();
+        }
     }
+
+
+
 }
