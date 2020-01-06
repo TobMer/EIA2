@@ -32,7 +32,7 @@ namespace aufgabe09 {
 
             if (this.position.y > crc2.canvas.height)
                 this.position.x = 800 * Math.random();
-            this.position.y = 600 * Math.random();
+            this.position.y += 2;
         }
 
         draw(): void {

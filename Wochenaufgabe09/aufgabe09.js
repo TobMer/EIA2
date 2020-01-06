@@ -22,7 +22,7 @@ var aufgabe09;
         drawSnowflake();
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
         let background = aufgabe09.crc2.getImageData(0, 0, 800, 600);
-        window.setInterval(update, 120, background);
+        window.setInterval(update, 30, background);
     }
     //HIntergrund
     function zeichneHintergrund() {

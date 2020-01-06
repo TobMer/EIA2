@@ -14,7 +14,7 @@ var aufgabe09;
             this.position.add(this.velocity);
             if (this.position.y > aufgabe09.crc2.canvas.height)
                 this.position.x = 800 * Math.random();
-            this.position.y = 600 * Math.random();
+            this.position.y += 2;
         }
         draw() {
             aufgabe09.crc2.beginPath();
