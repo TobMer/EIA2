@@ -8,8 +8,10 @@ namespace aufgabe09 {
     window.addEventListener("load", handleLoad);
     export let crc2: CanvasRenderingContext2D;
     let golden: number = 0.62;
-    let snowflakes: Snowflake[] = [];
 
+    
+    
+    let birds: Bird[] = [];
 
 
     function handleLoad(_event: Event): void {
@@ -39,8 +41,10 @@ namespace aufgabe09 {
 
         zeichnevogelhaus();
         drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
-        drawSnowflake();
 
+
+        drawSnowflake();
+       
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
 
 
@@ -51,7 +55,7 @@ namespace aufgabe09 {
 
 
 
-        window.setInterval(update, 30, background);
+        window.setInterval(update, 20, background);
 
 
     }
@@ -335,16 +339,23 @@ namespace aufgabe09 {
 
             let farbgrad: number = 120 - Math.random() * 60;
             let color: string = "HSLA(" + farbgrad + ", 100%, 59%, 1)";
-            // let scale: number = 0.7 + Math.random() * 1;
+            let scale: number = 0.7 + Math.random() * 1;
+            
+            
 
             crc2.fillStyle = color;
             crc2.save();
             let x: number = Math.random() * _size.x;
             let y: number = - (Math.random() * _size.y);
             crc2.translate(x, y);
-            // crc2.transform(scale, 0, 0, scale, 0, 0);
-            crc2.fill(bird);
+            crc2.transform(scale, 0, 0, scale, 0, 0);
+
             crc2.restore();
+
+            
+           
+            bird.push(birds);
+           
         }
         crc2.restore();
 
@@ -353,7 +364,7 @@ namespace aufgabe09 {
     function drawSnowflake(): void {
 
         console.log("snowflake");
-        let nSnowflake: number = 100;
+        let nSnowflake: number = 120;
 
         for (let i: number = 0; i < nSnowflake; i++) {
             let snowflake: Snowflake = new Snowflake();
@@ -362,17 +373,23 @@ namespace aufgabe09 {
     }
 
 
+
+
     function update(_backgroundData: ImageData): void {
         console.log("Update!");
 
         void crc2.putImageData(_backgroundData, 0, 0);
 
-        for (let snowflake of snowflakes) {
+        for (let snowflake of snowflakes) { // SCHNEEFLOCKEN
             snowflake.move(1);
             snowflake.draw();
         }
     }
 
+    for (let bird of birds) {// VÖGEL
 
+        bird.move(1);
+        bird.draw();
+    }
 
 }

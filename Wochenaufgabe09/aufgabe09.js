@@ -3,7 +3,7 @@ var aufgabe09;
 (function (aufgabe09) {
     window.addEventListener("load", handleLoad);
     let golden = 0.62;
-    let snowflakes = [];
+    let birds = [];
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -22,7 +22,7 @@ var aufgabe09;
         drawSnowflake();
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
         let background = aufgabe09.crc2.getImageData(0, 0, 800, 600);
-        window.setInterval(update, 30, background);
+        window.setInterval(update, 20, background);
     }
     //HIntergrund
     function zeichneHintergrund() {
@@ -222,21 +222,21 @@ var aufgabe09;
         for (let drawn = 0; drawn < nBirds; drawn++) {
             let farbgrad = 120 - Math.random() * 60;
             let color = "HSLA(" + farbgrad + ", 100%, 59%, 1)";
-            // let scale: number = 0.7 + Math.random() * 1;
+            let scale = 0.7 + Math.random() * 1;
             aufgabe09.crc2.fillStyle = color;
             aufgabe09.crc2.save();
             let x = Math.random() * _size.x;
             let y = -(Math.random() * _size.y);
             aufgabe09.crc2.translate(x, y);
-            // crc2.transform(scale, 0, 0, scale, 0, 0);
-            aufgabe09.crc2.fill(bird);
+            aufgabe09.crc2.transform(scale, 0, 0, scale, 0, 0);
             aufgabe09.crc2.restore();
+            bird.push(birds);
         }
         aufgabe09.crc2.restore();
     }
     function drawSnowflake() {
         console.log("snowflake");
-        let nSnowflake = 100;
+        let nSnowflake = 120;
         for (let i = 0; i < nSnowflake; i++) {
             let snowflake = new aufgabe09.Snowflake();
             snowflakes.push(snowflake);
@@ -245,10 +245,14 @@ var aufgabe09;
     function update(_backgroundData) {
         console.log("Update!");
         void aufgabe09.crc2.putImageData(_backgroundData, 0, 0);
-        for (let snowflake of snowflakes) {
+        for (let snowflake of snowflakes) { // SCHNEEFLOCKEN
             snowflake.move(1);
             snowflake.draw();
         }
+    }
+    for (let bird of birds) { // VÖGEL
+        bird.move(1);
+        bird.draw();
     }
 })(aufgabe09 || (aufgabe09 = {}));
 //# sourceMappingURL=aufgabe09.js.map

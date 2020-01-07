@@ -18,7 +18,7 @@ namespace aufgabe09 {
             console.log("Snowflakes constructor");
             this.position = new Vector(x, y); // position DIESES Objekts
 
-            this.velocity = new Vector(0, 2 * Math.random() + 0.7);
+            this.velocity = new Vector(0, 3); // Was macht das hier nochmal
 
 
 
@@ -30,9 +30,9 @@ namespace aufgabe09 {
             console.log("snowflakes move");
             this.position.add(this.velocity);
 
-            if (this.position.y > crc2.canvas.height)
-                this.position.x = 800 * Math.random();
-            this.position.y += 2;
+            if (this.position.y > 600)
+                
+            this.position.y -= crc2.canvas.height; // Hier bewegen sich die SChneeflocken dauerhaft!Wieso?
         }
 
         draw(): void {
