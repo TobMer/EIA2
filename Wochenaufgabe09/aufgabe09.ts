@@ -42,8 +42,7 @@ namespace aufgabe09 {
         //drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
 
 
-        drawSnowflake();
-        drawBirds();
+
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
 
 
@@ -56,6 +55,9 @@ namespace aufgabe09 {
 
         window.setInterval(update, 20, background);
 
+        drawSnowflake();
+
+        drawBirds();
 
     }
 
@@ -351,9 +353,10 @@ namespace aufgabe09 {
 
             crc2.restore();
 
+            let bird: Bird = new Bird();
+            birds.push(bird); // ich pushe die Birds
 
-
-            bird.push(birds);
+        
 
         }
         crc2.restore();

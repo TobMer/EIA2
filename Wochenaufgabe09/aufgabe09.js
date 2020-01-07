@@ -20,11 +20,11 @@ var aufgabe09;
         zeichneHut();
         zeichnevogelhaus();
         //drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
-        drawSnowflake();
-        drawBirds();
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
         let background = aufgabe09.crc2.getImageData(0, 0, 800, 600);
         window.setInterval(update, 20, background);
+        drawSnowflake();
+        drawBirds();
     }
     //HIntergrund
     function zeichneHintergrund() {
@@ -232,7 +232,8 @@ var aufgabe09;
             aufgabe09.crc2.translate(x, y);
             aufgabe09.crc2.transform(scale, 0, 0, scale, 0, 0);
             aufgabe09.crc2.restore();
-            bird.push(birds);
+            let bird = new aufgabe09.Bird();
+            birds.push(bird); // ich pushe die Birds
         }
         aufgabe09.crc2.restore();
     }
