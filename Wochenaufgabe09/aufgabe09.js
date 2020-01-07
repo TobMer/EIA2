@@ -3,6 +3,7 @@ var aufgabe09;
 (function (aufgabe09) {
     window.addEventListener("load", handleLoad);
     let golden = 0.62;
+    let snowflakes = [];
     let birds = [];
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
@@ -18,8 +19,9 @@ var aufgabe09;
         zeichneBaum();
         zeichneHut();
         zeichnevogelhaus();
-        drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
+        //drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
         drawSnowflake();
+        drawBirds();
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
         let background = aufgabe09.crc2.getImageData(0, 0, 800, 600);
         window.setInterval(update, 20, background);

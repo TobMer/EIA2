@@ -9,8 +9,7 @@ namespace aufgabe09 {
     export let crc2: CanvasRenderingContext2D;
     let golden: number = 0.62;
 
-    
-    
+    let snowflakes: Snowflake[] = [];
     let birds: Bird[] = [];
 
 
@@ -40,11 +39,11 @@ namespace aufgabe09 {
         zeichneHut();
 
         zeichnevogelhaus();
-        drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
+        //drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
 
 
         drawSnowflake();
-       
+        drawBirds();
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
 
 
@@ -340,8 +339,8 @@ namespace aufgabe09 {
             let farbgrad: number = 120 - Math.random() * 60;
             let color: string = "HSLA(" + farbgrad + ", 100%, 59%, 1)";
             let scale: number = 0.7 + Math.random() * 1;
-            
-            
+
+
 
             crc2.fillStyle = color;
             crc2.save();
@@ -352,10 +351,10 @@ namespace aufgabe09 {
 
             crc2.restore();
 
-            
-           
+
+
             bird.push(birds);
-           
+
         }
         crc2.restore();
 
