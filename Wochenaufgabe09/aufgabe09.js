@@ -28,7 +28,7 @@ var aufgabe09;
     }
     //HIntergrund
     function zeichneHintergrund() {
-        console.log("Hintergrund");
+        //console.log("Hintergrund");
         let gradient = aufgabe09.crc2.createLinearGradient(0, 0, 0, aufgabe09.crc2.canvas.height);
         gradient.addColorStop(0, "lightblue");
         gradient.addColorStop(golden, "white");
@@ -202,26 +202,27 @@ var aufgabe09;
     // tslint:disable-next-line:typedef
     function createBirds() {
         console.log("create Birds");
+        //let bird: Path2D = newFunction();
         let nBirds = 21;
-        aufgabe09.crc2.translate(_position.x, _position.y);
-        for (let drawn = 0; drawn < nBirds; drawn++) {
-            let farbgrad = 120 - Math.random() * 60;
-            let color = "HSLA(" + farbgrad + ", 100%, 59%, 1)";
-            let scale = 0.7 + Math.random() * 1;
-            aufgabe09.crc2.fillStyle = color;
-            aufgabe09.crc2.save();
-            let x = Math.random();
-            let y = -Math.random();
-            aufgabe09.crc2.translate(x, y);
-            aufgabe09.crc2.transform(scale, 0, 0, scale, 0, 0);
-            aufgabe09.crc2.restore();
+        // crc2.save();
+        //crc2.translate(_position.x, _position.y);
+        for (let i = 0; i < nBirds; i++) {
+            // crc2.save();
+            // let x: number = Math.random();
+            // let y: number = - Math.random();
+            // crc2.translate(x, y);
+            // crc2.transform(scale, 0, 0, scale, 0, 0);
+            // crc2.restore();
             let bird = new aufgabe09.Bird();
             birds.push(bird); // ich pushe die Birds
         }
-        aufgabe09.crc2.restore();
+        // crc2.restore();
+        // function newFunction(): Path2D {
+        //     return new Path2D();
+        // }
     }
     function drawSnowflake() {
-        console.log("snowflake");
+        //console.log("snowflake");
         let nSnowflake = 120;
         for (let i = 0; i < nSnowflake; i++) {
             let snowflake = new aufgabe09.Snowflake();
@@ -229,16 +230,16 @@ var aufgabe09;
         }
     }
     function update(_backgroundData) {
-        console.log("Update!");
+        //console.log("Update!");
         void aufgabe09.crc2.putImageData(_backgroundData, 0, 0);
         for (let snowflake of snowflakes) { // SCHNEEFLOCKEN
             snowflake.move(1);
             snowflake.draw();
         }
-    }
-    for (let bird of birds) { // VÖGEL
-        bird.move(1);
-        bird.draw();
+        for (let bird of birds) { // VÖGEL
+            bird.move(1);
+            bird.draw();
+        }
     }
 })(aufgabe09 || (aufgabe09 = {}));
 //# sourceMappingURL=aufgabe09.js.map

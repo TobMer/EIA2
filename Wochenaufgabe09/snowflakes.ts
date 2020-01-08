@@ -15,7 +15,7 @@ namespace aufgabe09 {
             let x: number = 800 * Math.random();
             let y: number = 600 * Math.random();
 
-            console.log("Snowflakes constructor");
+            //console.log("Snowflakes constructor");
             this.position = new Vector(x, y); // position DIESES Objekts
 
             this.velocity = new Vector(0, 3); // Was macht das hier nochmal
@@ -27,7 +27,7 @@ namespace aufgabe09 {
 
 
         move(_timeslice: number): void {
-            console.log("snowflakes move");
+            //console.log("snowflakes move");
             this.position.add(this.velocity);
 
             if (this.position.y > 600)

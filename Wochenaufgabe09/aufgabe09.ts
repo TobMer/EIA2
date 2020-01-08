@@ -33,26 +33,13 @@ namespace aufgabe09 {
         zeichneBerge({ x: 0, y: crc2.canvas.height * golden }, 75, 200, "white", "grey");
         zeichneBerge({ x: 0, y: crc2.canvas.height * golden }, 50, 150, "lightgrey", "grey"); //zeichnet nochmal Berge
 
-
-
         zeichneBaum();
         zeichneHut();
 
         zeichnevogelhaus();
         //drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
-
-
-
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
-
-
-
-
         let background: ImageData = crc2.getImageData(0, 0, 800, 600);
-
-
-
-
         window.setInterval(update, 20, background);
 
         drawSnowflake();
@@ -65,7 +52,7 @@ namespace aufgabe09 {
 
     //HIntergrund
     function zeichneHintergrund(): void {
-        console.log("Hintergrund");
+        //console.log("Hintergrund");
 
         let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
         gradient.addColorStop(0, "lightblue");
@@ -308,70 +295,34 @@ namespace aufgabe09 {
 
         console.log("create Birds");
 
-        let bird: Path2D = newFunction();
+        //let bird: Path2D = newFunction();
         let nBirds: number = 21;
-        let radiusBird: number = 24 + Math.random() * 10;
-
-        let colorgrade: number = 120 - Math.random() * 60;
-        let color: string = "HSLA(" + colorgrade + ", 100%, 59%, 1)";
-
-        crc2.fillStyle = color;
-
-        bird.ellipse(0, 0, 1 / 2 * radiusBird, radiusBird, 30, 0, 2 * Math.PI); // Körper der Vögel
-        bird.moveTo(-10, 0);
-        bird.lineTo(0, -24); //neuen Pfad aufmachen SChnäbel
-        bird.lineTo(10, 0); //neuen Pfad aufmachen SChnäbel
-        bird.lineTo(0, 24);
-        bird.closePath();
-        crc2.fill(bird);
-
-
-
-        bird.moveTo(40, -8);
-        bird.lineTo(60, -16);
-        bird.lineTo(40, -20);
-
-
-        bird.arc(30, -8, (1 / 2) * radiusBird, 0, 2 * Math.PI);
-        bird.ellipse(5, -5, (1 / 3) * radiusBird, radiusBird, 13, 0, 2 * Math.PI);
-
-        crc2.save();
+        // crc2.save();
         //crc2.translate(_position.x, _position.y);
 
         for (let i: number = 0; i < nBirds; i++) {
+            // crc2.save();
+            // let x: number = Math.random();
+            // let y: number = - Math.random();
+            // crc2.translate(x, y);
+            // crc2.transform(scale, 0, 0, scale, 0, 0);
 
-            let farbgrad: number = 120 - Math.random() * 60;
-            let color: string = "HSLA(" + farbgrad + ", 100%, 59%, 1)";
-            let scale: number = 0.7 + Math.random() * 1;
-
-
-
-            crc2.fillStyle = color;
-            crc2.save();
-            let x: number = Math.random();
-            let y: number = - Math.random();
-            crc2.translate(x, y);
-            crc2.transform(scale, 0, 0, scale, 0, 0);
-
-            crc2.restore();
+            // crc2.restore();
 
             let bird: Bird = new Bird();
             birds.push(bird); // ich pushe die Birds
-
-
-
         }
-        crc2.restore();
+        // crc2.restore();
 
 
-        function newFunction(): Path2D {
-            return new Path2D();
-        }
+        // function newFunction(): Path2D {
+        //     return new Path2D();
+        // }
     }
 
     function drawSnowflake(): void {
 
-        console.log("snowflake");
+        //console.log("snowflake");
         let nSnowflake: number = 120;
 
         for (let i: number = 0; i < nSnowflake; i++) {
@@ -384,7 +335,7 @@ namespace aufgabe09 {
 
 
     function update(_backgroundData: ImageData): void {
-        console.log("Update!");
+        //console.log("Update!");
 
         void crc2.putImageData(_backgroundData, 0, 0);
 
@@ -392,13 +343,13 @@ namespace aufgabe09 {
             snowflake.move(1);
             snowflake.draw();
         }
+        for (let bird of birds) {// VÖGEL
+    
+            bird.move(1);
+            bird.draw();
+    
+        }
     }
 
-    for (let bird of birds) {// VÖGEL
-
-        bird.move(1);
-        bird.draw();
-
-    }
 
 }
