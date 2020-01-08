@@ -24,7 +24,7 @@ var aufgabe09;
         let background = aufgabe09.crc2.getImageData(0, 0, 800, 600);
         window.setInterval(update, 20, background);
         drawSnowflake();
-        drawBirds();
+        createBirds();
     }
     //HIntergrund
     function zeichneHintergrund() {
@@ -200,26 +200,9 @@ var aufgabe09;
         aufgabe09.crc2.fill();
     }
     // tslint:disable-next-line:typedef
-    function drawBirds(_position, _size) {
-        let bird = new Path2D();
+    function createBirds() {
+        console.log("create Birds");
         let nBirds = 21;
-        let radiusBird = 24 + Math.random() * 10;
-        let colorgrade = 120 - Math.random() * 60;
-        let color = "HSLA(" + colorgrade + ", 100%, 59%, 1)";
-        aufgabe09.crc2.fillStyle = color;
-        bird.ellipse(0, 0, 1 / 2 * radiusBird, radiusBird, 30, 0, 2 * Math.PI); // Körper der Vögel
-        bird.moveTo(-10, 0);
-        bird.lineTo(0, -24); //neuen Pfad aufmachen SChnäbel
-        bird.lineTo(10, 0); //neuen Pfad aufmachen SChnäbel
-        bird.lineTo(0, 24);
-        bird.closePath();
-        // crc2.fill(bird);
-        bird.moveTo(40, -8);
-        bird.lineTo(60, -16);
-        bird.lineTo(40, -20);
-        bird.arc(30, -8, (1 / 2) * radiusBird, 0, 2 * Math.PI);
-        // vogel.ellipse(5, -5, (1 / 3) * radiusVogel, radiusVogel, 13, 0, 2 * Math.PI);
-        aufgabe09.crc2.save();
         aufgabe09.crc2.translate(_position.x, _position.y);
         for (let drawn = 0; drawn < nBirds; drawn++) {
             let farbgrad = 120 - Math.random() * 60;
@@ -227,8 +210,8 @@ var aufgabe09;
             let scale = 0.7 + Math.random() * 1;
             aufgabe09.crc2.fillStyle = color;
             aufgabe09.crc2.save();
-            let x = Math.random() * _size.x;
-            let y = -(Math.random() * _size.y);
+            let x = Math.random();
+            let y = -Math.random();
             aufgabe09.crc2.translate(x, y);
             aufgabe09.crc2.transform(scale, 0, 0, scale, 0, 0);
             aufgabe09.crc2.restore();

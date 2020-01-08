@@ -56,8 +56,8 @@ namespace aufgabe09 {
         window.setInterval(update, 20, background);
 
         drawSnowflake();
+        createBirds();
 
-        drawBirds();
 
     }
 
@@ -304,9 +304,11 @@ namespace aufgabe09 {
     }
 
     // tslint:disable-next-line:typedef
-    function drawBirds(_position: Vector, _size: Vector) {
+    function createBirds() {
 
-        let bird: Path2D = new Path2D();
+        console.log("create Birds");
+
+        let bird: Path2D = newFunction();
         let nBirds: number = 21;
         let radiusBird: number = 24 + Math.random() * 10;
 
@@ -321,7 +323,7 @@ namespace aufgabe09 {
         bird.lineTo(10, 0); //neuen Pfad aufmachen SChnäbel
         bird.lineTo(0, 24);
         bird.closePath();
-        // crc2.fill(bird);
+        crc2.fill(bird);
 
 
 
@@ -331,12 +333,12 @@ namespace aufgabe09 {
 
 
         bird.arc(30, -8, (1 / 2) * radiusBird, 0, 2 * Math.PI);
-        // vogel.ellipse(5, -5, (1 / 3) * radiusVogel, radiusVogel, 13, 0, 2 * Math.PI);
+        bird.ellipse(5, -5, (1 / 3) * radiusBird, radiusBird, 13, 0, 2 * Math.PI);
 
         crc2.save();
-        crc2.translate(_position.x, _position.y);
+        //crc2.translate(_position.x, _position.y);
 
-        for (let drawn: number = 0; drawn < nBirds; drawn++) {
+        for (let i: number = 0; i < nBirds; i++) {
 
             let farbgrad: number = 120 - Math.random() * 60;
             let color: string = "HSLA(" + farbgrad + ", 100%, 59%, 1)";
@@ -346,8 +348,8 @@ namespace aufgabe09 {
 
             crc2.fillStyle = color;
             crc2.save();
-            let x: number = Math.random() * _size.x;
-            let y: number = - (Math.random() * _size.y);
+            let x: number = Math.random();
+            let y: number = - Math.random();
             crc2.translate(x, y);
             crc2.transform(scale, 0, 0, scale, 0, 0);
 
@@ -356,11 +358,15 @@ namespace aufgabe09 {
             let bird: Bird = new Bird();
             birds.push(bird); // ich pushe die Birds
 
-        
+
 
         }
         crc2.restore();
 
+
+        function newFunction(): Path2D {
+            return new Path2D();
+        }
     }
 
     function drawSnowflake(): void {
@@ -392,6 +398,7 @@ namespace aufgabe09 {
 
         bird.move(1);
         bird.draw();
+
     }
 
 }

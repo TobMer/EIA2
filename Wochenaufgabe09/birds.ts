@@ -31,8 +31,8 @@ namespace aufgabe09 {
             this.position.add(this.velocity);
 
             if (this.position.x > 800)
-                
-            this.position.x -= crc2.canvas.width; // 
+
+                this.position.x = crc2.canvas.width; // 
         }
 
         draw(): void {
@@ -40,13 +40,20 @@ namespace aufgabe09 {
 
 
             //crc2.beginPath();
+            crc2.beginPath();
             crc2.save();
-            crc2.translate(this.position.x, this.position.y);
             
+            crc2.translate(this.position.x, this.position.y);
+
+
+
+            let bird: Path2D = new Path2D();
+            //let x: number = this.position.x;
+           // let y: number = this.position.y;
             
             
             crc2.fill();
-
+            crc2.stroke(bird);
             crc2.restore();
             crc2.closePath();
         }
