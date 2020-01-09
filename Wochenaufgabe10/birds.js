@@ -11,8 +11,7 @@ var aufgabe10;
             this.scale = 0.7 + Math.random() * 1;
             console.log("Birds constructor");
             this.position = new aufgabe10.Vector(x, y); // position DIESES Objekts
-            Math.random() * 2;
-            ; // Was macht das hier nochmal
+            Math.random() * 2; // Was macht das hier nochmal
             this.draw(); //Birds werden gezeichnet
         }
         move(_timeslice) {
