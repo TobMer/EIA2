@@ -19,7 +19,6 @@ var aufgabe10;
             do {
                 this.y = Math.random() * 190; // Höhe der Blätter
                 this.x = (Math.random() - 0.5) * 2 * this.maxRadius; // Radius der Kreise und Blätter
-                console.log("x " + this.x);
                 aufgabe10.crc2.save();
                 aufgabe10.crc2.translate(this.x, -this.y);
                 let colorAngle = 123 - Math.random() * 60; // Farbe der Blätter
