@@ -24,7 +24,7 @@ namespace aufgabe10 {
             console.log("Birds constructor");
             this.position = new Vector(x, y); // position DIESES Objekts
 
-            Math.random() * 2 ; // Was macht das hier nochmal
+            this.velocity.x = Math.random() * 2 ; // Was macht das hier nochmal
 
             this.draw(); //Birds werden gezeichnet
 
