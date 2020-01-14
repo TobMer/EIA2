@@ -35,7 +35,7 @@ namespace aufgabe10 {
         move(_timeslice: number): void {
             console.log("Birds move");
             this.position.add(this.velocity);
-
+            
             if (this.position.x > 900)
 
                 this.position.x = - 100;
