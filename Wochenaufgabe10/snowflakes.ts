@@ -2,15 +2,14 @@
 namespace aufgabe10 {
 
 
-    export class Snowflake {
+    export class Snowflake extends Moveable {
+        // extends erweitert klasse Moveable.
 
 
-        position: Vector;
-        velocity: Vector;
-        size: number;
+       
 
         constructor() {
-
+            super();
 
             let x: number = 800 * Math.random();
             let y: number = 600 * Math.random();
@@ -26,13 +25,13 @@ namespace aufgabe10 {
         }
 
 
-        move(_timeslice: number): void {
+        move(): void {
             //console.log("snowflakes move");
             this.position.add(this.velocity);
 
             if (this.position.y > 600)
-                
-            this.position.y -= crc2.canvas.height; // Hier bewegen sich die SChneeflocken dauerhaft!Wieso?
+
+                this.position.y -= crc2.canvas.height; // Hier bewegen sich die SChneeflocken dauerhaft!Wieso?
         }
 
         draw(): void {
@@ -44,7 +43,7 @@ namespace aufgabe10 {
             crc2.translate(this.position.x, this.position.y);
             crc2.fillStyle = "white";
             crc2.arc(0, 0, 5, 0, 2 * Math.PI);
-            
+
             crc2.fill();
 
             crc2.restore();

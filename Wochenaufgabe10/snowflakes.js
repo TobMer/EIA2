@@ -1,15 +1,17 @@
 "use strict";
 var aufgabe10;
 (function (aufgabe10) {
-    class Snowflake {
+    class Snowflake extends aufgabe10.Moveable {
+        // extends erweitert klasse Moveable.
         constructor() {
+            super();
             let x = 800 * Math.random();
             let y = 600 * Math.random();
             //console.log("Snowflakes constructor");
             this.position = new aufgabe10.Vector(x, y); // position DIESES Objekts
             this.velocity = new aufgabe10.Vector(0, 3); // Was macht das hier nochmal
         }
-        move(_timeslice) {
+        move() {
             //console.log("snowflakes move");
             this.position.add(this.velocity);
             if (this.position.y > 600)

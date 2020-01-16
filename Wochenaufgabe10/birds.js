@@ -1,8 +1,9 @@
 "use strict";
 var aufgabe10;
 (function (aufgabe10) {
-    class Bird {
+    class Bird extends aufgabe10.Moveable {
         constructor() {
+            super(); // constructor der Superklasse Aufruf!!
             this.colorgrade = 120 - Math.random() * 60;
             this.radiusBird = 24 + Math.random() * 10;
             this.color = "HSLA(" + this.colorgrade + ", 100%, 59%, 1)";
@@ -11,10 +12,12 @@ var aufgabe10;
             this.scale = 0.7 + Math.random() * 1;
             console.log("Birds constructor");
             this.position = new aufgabe10.Vector(x, y); // position DIESES Objekts
-            this.velocity.x = Math.random() * 2; // Was macht das hier nochmal
+            this.velocity = new aufgabe10.Vector(Math.random() * 1, 0); // WErt für die Geschwindigkeit. Mit new wird ein neues Objekt erstellt. SOzuzsagen ein Bauplan
+            // this.velocity.x = Math.random() * 2 ;
+            this.velocity.y = Math.random() * 1;
             this.draw(); //Birds werden gezeichnet
         }
-        move(_timeslice) {
+        move() {
             console.log("Birds move");
             this.position.add(this.velocity);
             if (this.position.x > 900)

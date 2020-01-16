@@ -9,9 +9,8 @@ namespace aufgabe10 {
     export let crc2: CanvasRenderingContext2D;
     let golden: number = 0.62;
 
-    let snowflakes: Snowflake[] = [];
-    let birds: Bird[] = [];
-
+    
+    let moveables: Moveable[] = []; // neues Array für Moveable, für alle bewegten Objekte
 
     function handleLoad(_event: Event): void {
 
@@ -281,7 +280,7 @@ namespace aufgabe10 {
             // crc2.restore();
 
             let bird: Bird = new Bird();
-            birds.push(bird); // ich pushe die Birds
+            moveables.push(bird); // ich pushe die Birds
         }
         // crc2.restore();
 
@@ -298,7 +297,7 @@ namespace aufgabe10 {
 
         for (let i: number = 0; i < nSnowflake; i++) {
             let snowflake: Snowflake = new Snowflake();
-            snowflakes.push(snowflake);
+            moveables.push(snowflake); // snowflake wird in moveable array reingepusht
         }
     }
 
@@ -310,14 +309,10 @@ namespace aufgabe10 {
 
         void crc2.putImageData(_backgroundData, 0, 0);
 
-        for (let snowflake of snowflakes) { // SCHNEEFLOCKEN
-            snowflake.move(1);
-            snowflake.draw();
-        }
-        for (let bird of birds) {// VÖGEL
+        for (let moveable of moveables) {// VÖGEL
 
-            bird.move(1);
-            bird.draw();
+            moveable.move(); // 1 ist ein Übergabeparameter
+            moveable.draw();
 
         }
     }

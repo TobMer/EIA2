@@ -3,8 +3,7 @@ var aufgabe10;
 (function (aufgabe10) {
     window.addEventListener("load", handleLoad);
     let golden = 0.62;
-    let snowflakes = [];
-    let birds = [];
+    let moveables = []; // neues Array für Moveable, für alle bewegten Objekte
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -194,7 +193,7 @@ var aufgabe10;
             // crc2.transform(scale, 0, 0, scale, 0, 0);
             // crc2.restore();
             let bird = new aufgabe10.Bird();
-            birds.push(bird); // ich pushe die Birds
+            moveables.push(bird); // ich pushe die Birds
         }
         // crc2.restore();
         // function newFunction(): Path2D {
@@ -206,19 +205,15 @@ var aufgabe10;
         let nSnowflake = 120;
         for (let i = 0; i < nSnowflake; i++) {
             let snowflake = new aufgabe10.Snowflake();
-            snowflakes.push(snowflake);
+            moveables.push(snowflake); // snowflake wird in moveable array reingepusht
         }
     }
     function update(_backgroundData) {
         //console.log("Update!");
         void aufgabe10.crc2.putImageData(_backgroundData, 0, 0);
-        for (let snowflake of snowflakes) { // SCHNEEFLOCKEN
-            snowflake.move(1);
-            snowflake.draw();
-        }
-        for (let bird of birds) { // VÖGEL
-            bird.move(1);
-            bird.draw();
+        for (let moveable of moveables) { // VÖGEL
+            moveable.move(); // 1 ist ein Übergabeparameter
+            moveable.draw();
         }
     }
 })(aufgabe10 || (aufgabe10 = {}));

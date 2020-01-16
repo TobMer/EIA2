@@ -2,19 +2,15 @@
 namespace aufgabe10 {
 
 
-    export class Bird {
+    export class Bird extends Moveable {
 
-
-        position: Vector;
-        velocity: Vector;
-        size: number;
         radiusBird: number;
         colorgrade: number;
         color: string;
         scale: number;
 
         constructor() {
-
+            super(); // constructor der Superklasse Aufruf!!
             this.colorgrade = 120 - Math.random() * 60;
             this.radiusBird = 24 + Math.random() * 10;
             this.color = "HSLA(" + this.colorgrade + ", 100%, 59%, 1)";
@@ -22,9 +18,13 @@ namespace aufgabe10 {
             let y: number = 200 * Math.random();
             this.scale = 0.7 + Math.random() * 1;
             console.log("Birds constructor");
-            this.position = new Vector(x, y); // position DIESES Objekts
 
-            this.velocity.x = Math.random() * 2 ; // Was macht das hier nochmal
+            this.position = new Vector(x, y); // position DIESES Objekts
+            this.velocity = new Vector(Math.random() * 1, 0); // WErt für die Geschwindigkeit. Mit new wird ein neues Objekt erstellt. SOzuzsagen ein Bauplan
+
+            // this.velocity.x = Math.random() * 2 ;
+            this.velocity.y = Math.random() * 1;
+
 
             this.draw(); //Birds werden gezeichnet
 
@@ -32,10 +32,10 @@ namespace aufgabe10 {
         }
 
 
-        move(_timeslice: number): void {
+        move(): void {
             console.log("Birds move");
             this.position.add(this.velocity);
-            
+
             if (this.position.x > 900)
 
                 this.position.x = - 100;
