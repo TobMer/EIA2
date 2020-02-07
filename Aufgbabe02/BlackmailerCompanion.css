@@ -10,7 +10,7 @@ body {
 }
 
 div {
-    border: thin solid black;
+    border: thin solid rgb(0, 0, 0);
     background-color: beige;
     position: relative;
     top: 0px;

@@ -12,7 +12,7 @@ var aufgabe10;
             this.scale = 0.7 + Math.random() * 1;
             console.log("Birds constructor");
             this.position = new aufgabe10.Vector(x, y); // position DIESES Objekts
-            this.velocity = new aufgabe10.Vector(Math.random() * 1, 0); // WErt für die Geschwindigkeit. Mit new wird ein neues Objekt erstellt. SOzuzsagen ein Bauplan
+            this.velocity = new aufgabe10.Vector(Math.random() * 2, 0); // WErt für die Geschwindigkeit. Mit new wird ein neues Objekt erstellt. SOzuzsagen ein Bauplan
             // this.velocity.x = Math.random() * 2 ;
             this.velocity.y = Math.random() * 1;
             this.draw(); //Birds werden gezeichnet
@@ -41,6 +41,7 @@ var aufgabe10;
             bird.moveTo(40, -8);
             bird.lineTo(60, -16);
             bird.lineTo(40, -20);
+            aufgabe10.crc2.stroke();
             aufgabe10.crc2.transform(this.scale, 0, 0, this.scale, 0, 0);
             bird.arc(30, -8, (1 / 2) * this.radiusBird, 0, 2 * Math.PI);
             bird.ellipse(5, -5, (1 / 3) * this.radiusBird, this.radiusBird, 13, 0, 2 * Math.PI);

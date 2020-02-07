@@ -1,4 +1,4 @@
-namespace aufgabe10 {
+namespace Endabgabe {
     interface Vector {
         x: number;
         y: number;
@@ -9,6 +9,7 @@ namespace aufgabe10 {
     export let crc2: CanvasRenderingContext2D;
     let golden: number = 0.62;
 
+    let url: string = "https://fiepsonet.herokuapp.com/"; //Link zu dem Programm. Man kommt damit zu der Endabgabe
     
     let moveables: Moveable[] = []; // neues Array für Moveable, für alle bewegten Objekte
 

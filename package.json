@@ -4,7 +4,7 @@
   "description": "Control for the heroku implementation",
   "main": "",
   "scripts": {
-    "start": "node Aufgabe06/server/server.js" //Updaten für07
+    "start": "node Endabgabe_tobiasmerkle_birds/server/server.js" 
   },
   "repository": {
     "type": "git",

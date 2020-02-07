@@ -1,5 +1,5 @@
 
-namespace aufgabe10 {
+namespace Endabgabe {
 
 
     export class Bird extends Moveable { //erweitert mit extend. Wird ausgeführt durch super()
@@ -64,7 +64,7 @@ namespace aufgabe10 {
             bird.closePath();
 
 
-            bird.moveTo(40, -8);
+            bird.moveTo(40, -8); //schnabel
             bird.lineTo(60, -16);
             bird.lineTo(40, -20);
             crc2.stroke();
