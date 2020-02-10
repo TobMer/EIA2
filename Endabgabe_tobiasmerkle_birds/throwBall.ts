@@ -21,12 +21,11 @@ namespace Endabgabe {
 
             this.target = _position;
 
-
-            let x: number = (this.target.x - this.position.x) * 0.03; // geschwindigkeit zu dem ziel 
-            let y: number = (this.target.y - this.position.y) * 0.03;
+            let x: number = (this.target.x - this.position.x) * 0.05; // geschwindigkeit zu dem ziel 
+            let y: number = (this.target.y - this.position.y) * 0.05;
 
             let velocityball: Vector = new Vector(x, y);
-
+            console.log(velocityball);
             this.velocity = velocityball;
         }
 
@@ -48,11 +47,16 @@ namespace Endabgabe {
 
             crc2.restore();
             crc2.closePath();
-
-
         }
 
+        update(): void {
+            this.move();
+            this.draw();
+        }
 
+        move(): void {
+            this.position.add(this.velocity);
+        }
     }
 
 

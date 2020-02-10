@@ -11,7 +11,6 @@ var Endabgabe;
     let golden = 0.62; // Der Goldene Schnitt ist bei 0.62
     let url = "https://fiepsonet.herokuapp.com/"; //Link zu dem Programm. Man kommt damit zu der Endabgabe
     let birdfood; //
-    //let throwball: ThrowBall;
     let moveables = []; // neues Array für Moveable, für alle bewegten Objekte
     console.log(moveables);
     let throwballArray = [];
@@ -244,7 +243,7 @@ var Endabgabe;
             drawScore();
         }
         for (let throwBall of throwballArray) {
-            throwBall.draw();
+            throwBall.update();
         }
     }
     function throwFood(_event) {

@@ -16,9 +16,10 @@ namespace Endabgabe {
 
 
     let birdfood: Birdfood; //
-    //let throwball: ThrowBall;
+   
     let moveables: Moveable[] = []; // neues Array für Moveable, für alle bewegten Objekte
     console.log(moveables);
+   
     let throwballArray: ThrowBall[] = [];
     let birdfoodsArray: Birdfood[] = []; // Array für das Bird Food und mit birdfoodsArray kann number gepusht werden
 
@@ -29,17 +30,11 @@ namespace Endabgabe {
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
-
-
-
         drawbackground();
 
 
         drawSun(new Vector(100, 75));
         drawCloud(new Vector(500, 175), new Vector(250, 150));
-
-
-
         drawSnowman(new Vector(175, 560));
         drawMountains(new Vector(0, crc2.canvas.height * golden), 75, 200, "white", "grey");
         drawMountains(new Vector(0, crc2.canvas.height * golden), 50, 150, "lightgrey", "grey"); //zeichnet nochmal Berge
@@ -60,11 +55,10 @@ namespace Endabgabe {
         drawSnowflake();
         createBirds();
         drawBall();
+        
         window.addEventListener("auxclick", throwFood); //WErfe Futter
         window.addEventListener("click", throwBall); // Werfe Ball
     }
-
-
 
     //HIntergrund
     function drawbackground(): void {
@@ -74,8 +68,6 @@ namespace Endabgabe {
         gradient.addColorStop(0, "lightblue");
         gradient.addColorStop(golden, "white");
         gradient.addColorStop(1, "HSL(160, 60%, 30%)");
-
-
 
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
@@ -129,8 +121,6 @@ namespace Endabgabe {
             crc2.restore();
         }
         crc2.restore();
-
-
 
 
     }
@@ -353,7 +343,8 @@ namespace Endabgabe {
 
 
         for (let throwBall of throwballArray) {
-            throwBall.draw();
+
+            throwBall.update();
 
         }
     }

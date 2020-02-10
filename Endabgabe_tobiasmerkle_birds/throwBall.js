@@ -8,9 +8,10 @@ var Endabgabe;
         }
         flytoTarget(_position) {
             this.target = _position;
-            let x = (this.target.x - this.position.x) * 0.03; // geschwindigkeit zu dem ziel 
-            let y = (this.target.y - this.position.y) * 0.03;
+            let x = (this.target.x - this.position.x) * 0.05; // geschwindigkeit zu dem ziel 
+            let y = (this.target.y - this.position.y) * 0.05;
             let velocityball = new Endabgabe.Vector(x, y);
+            console.log(velocityball);
             this.velocity = velocityball;
         }
         draw() {
@@ -26,6 +27,13 @@ var Endabgabe;
             Endabgabe.crc2.stroke();
             Endabgabe.crc2.restore();
             Endabgabe.crc2.closePath();
+        }
+        update() {
+            this.move();
+            this.draw();
+        }
+        move() {
+            this.position.add(this.velocity);
         }
     }
     Endabgabe.ThrowBall = ThrowBall;
