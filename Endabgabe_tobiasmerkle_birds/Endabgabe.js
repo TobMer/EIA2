@@ -1,35 +1,50 @@
 "use strict";
 var Endabgabe;
 (function (Endabgabe) {
+    /*interface Vector {
+        x: number;
+        y: number;
+
+    }*/
+    let score = 0; // Für den Score der Punkteanzahl
     window.addEventListener("load", handleLoad);
-    let golden = 0.62;
+    let golden = 0.62; // Der Goldene Schnitt ist bei 0.62
     let url = "https://fiepsonet.herokuapp.com/"; //Link zu dem Programm. Man kommt damit zu der Endabgabe
+    let birdfood; //
+    //let throwball: ThrowBall;
     let moveables = []; // neues Array für Moveable, für alle bewegten Objekte
+    console.log(moveables);
+    let throwballArray = [];
+    let birdfoodsArray = []; // Array für das Bird Food und mit birdfoodsArray kann number gepusht werden
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
             return;
         Endabgabe.crc2 = canvas.getContext("2d");
-        zeichneHintergrund();
-        zeichneSonne({ x: 100, y: 75 });
-        zeichneWolke({ x: 500, y: 175 }, { x: 250, y: 150 });
-        zeichneSchneemann({ x: 175, y: 560 });
-        zeichneBerge({ x: 0, y: Endabgabe.crc2.canvas.height * golden }, 75, 200, "white", "grey");
-        zeichneBerge({ x: 0, y: Endabgabe.crc2.canvas.height * golden }, 50, 150, "lightgrey", "grey"); //zeichnet nochmal Berge
+        drawbackground();
+        drawSun(new Endabgabe.Vector(100, 75));
+        drawCloud(new Endabgabe.Vector(500, 175), new Endabgabe.Vector(250, 150));
+        drawSnowman(new Endabgabe.Vector(175, 560));
+        drawMountains(new Endabgabe.Vector(0, Endabgabe.crc2.canvas.height * golden), 75, 200, "white", "grey");
+        drawMountains(new Endabgabe.Vector(0, Endabgabe.crc2.canvas.height * golden), 50, 150, "lightgrey", "grey"); //zeichnet nochmal Berge
         //birdfood({ x: 0, y: crc2.canvas.height * golden}, 20, 20, "brown"); // BIRDFOOD
         let baum = new Endabgabe.Tree;
         baum.draw();
-        zeichneHut();
-        zeichnevogelhaus();
+        drawhat();
+        drawBirdhouse();
         //drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
         //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
         let background = Endabgabe.crc2.getImageData(0, 0, 800, 600);
         window.setInterval(update, 20, background);
+        drawScore();
         drawSnowflake();
         createBirds();
+        drawBall();
+        window.addEventListener("auxclick", throwFood); //WErfe Futter
+        window.addEventListener("click", throwBall); // Werfe Ball
     }
     //HIntergrund
-    function zeichneHintergrund() {
+    function drawbackground() {
         //console.log("Hintergrund");
         let gradient = Endabgabe.crc2.createLinearGradient(0, 0, 0, Endabgabe.crc2.canvas.height);
         gradient.addColorStop(0, "lightblue");
@@ -38,7 +53,7 @@ var Endabgabe;
         Endabgabe.crc2.fillStyle = gradient;
         Endabgabe.crc2.fillRect(0, 0, Endabgabe.crc2.canvas.width, Endabgabe.crc2.canvas.height);
     }
-    function zeichneSonne(_position) {
+    function drawSun(_position) {
         console.log("Sonne", _position);
         let r1 = 30;
         let r2 = 150;
@@ -52,8 +67,8 @@ var Endabgabe;
         Endabgabe.crc2.fill();
         Endabgabe.crc2.restore();
     }
-    function zeichneWolke(_position, _size) {
-        console.log("Wolke", _position, _size);
+    function drawCloud(_position, _size) {
+        console.log("cloud", _position, _size);
         let nParticles = 70;
         let radiusParticle = 70;
         let particle = new Path2D();
@@ -74,7 +89,7 @@ var Endabgabe;
         }
         Endabgabe.crc2.restore();
     }
-    function zeichneBerge(_position, _min, _max, _colorHigh, _colorLow) {
+    function drawMountains(_position, _min, _max, _colorHigh, _colorLow) {
         console.log("Mountains" + _position, _min, _max, _colorHigh, _colorLow);
         console.log("Mountains");
         let stepMin = 50;
@@ -105,7 +120,7 @@ var Endabgabe;
     
         }
      */
-    function zeichneSchneemann(_position) {
+    function drawSnowman(_position) {
         Endabgabe.crc2.save();
         Endabgabe.crc2.translate(_position.x, _position.y);
         let path = new Path2D();
@@ -141,7 +156,7 @@ var Endabgabe;
     //     crc2.stroke();
     //     crc2.fill();
     // }
-    function zeichneHut() {
+    function drawhat() {
         Endabgabe.crc2.beginPath();
         Endabgabe.crc2.fillStyle = "black";
         Endabgabe.crc2.fillRect(150, 360, 50, 60);
@@ -152,7 +167,7 @@ var Endabgabe;
         Endabgabe.crc2.fill(nose);
         Endabgabe.crc2.stroke(nose);
     }
-    function zeichnevogelhaus() {
+    function drawBirdhouse() {
         console.log("vogelhaus");
         //Stützstab
         Endabgabe.crc2.beginPath();
@@ -182,7 +197,7 @@ var Endabgabe;
     }
     // tslint:disable-next-line:typedef
     function createBirds() {
-        console.log("create Birds");
+        //console.log("create Birds");
         //let bird: Path2D = newFunction();
         let nBirds = 21;
         // crc2.save();
@@ -217,6 +232,81 @@ var Endabgabe;
             moveable.move(); // 1 ist ein Übergabeparameter
             moveable.draw();
         }
+        for (let birdfood of birdfoodsArray) {
+            birdfood.draw(); //Birdfood wird immer wieder geupdtatet
+        }
+        for (let moveable of moveables) { // was passiert hier nochmal
+            if (moveable instanceof Endabgabe.Bird) { // es wird mit dem constructor gearbeitet
+                if (moveable.greedy) {
+                    moveable.chillontarget();
+                }
+            }
+            drawScore();
+        }
+        for (let throwBall of throwballArray) {
+            throwBall.draw();
+        }
+    }
+    function throwFood(_event) {
+        console.log(_event);
+        let birdDestination = new Endabgabe.Vector(_event.clientX, _event.clientY);
+        for (let moveable of moveables) {
+            if (moveable instanceof Endabgabe.Bird) {
+                if (moveable.greedy) {
+                    moveable.flytoTarget(birdDestination);
+                }
+            }
+        }
+        drawfood(birdDestination, new Endabgabe.Vector(100, 100)); //Food wird in Array gepusht, gespeichert
+    }
+    function drawfood(_position, _size) {
+        console.log("Futter geworfen", _position, _size);
+        let nParticles = 10; // Futter wird wie bei Schneeflocken erstellt
+        for (let drawn = 0; drawn < nParticles; drawn++) { // schleife 
+            let position = new Endabgabe.Vector(0, 0);
+            position.x = Math.random() * _size.x + _position.x - 50; //position da wo die vögel zu dem futter hinfliegen
+            position.y = Math.random() * _size.y + _position.y - 50;
+            birdfood = new Endabgabe.Birdfood(position);
+            birdfoodsArray.push(birdfood); // Bird Food Array wird gepusht
+        }
+        setTimeout(deleteFood, 2000);
+    }
+    function flyAway() {
+        for (let moveable of moveables) {
+            if (moveable instanceof Endabgabe.Bird) { //Moveable array wird durchgegangen und es wird BIRD KLasse geprüft und wenn JA, wird die eigenschaft Greedy geürpft aber sie ist true und dann kriegt er seine ursprümgliche Velocity 
+                if (moveable.greedy) {
+                    if (Math.random() * 8 < 0.6) { // nach einiger ZEit fliegne die Vögel weg und haben die lgeiche Velocity
+                        moveable.velocity = new Endabgabe.Vector(Math.random() * 2, Math.random() * 1);
+                    }
+                }
+            }
+        }
+    }
+    Endabgabe.flyAway = flyAway;
+    function deleteFood() {
+        birdfoodsArray.splice(0, 10); //10 Futterpartikel vercshwinden ,also alle, nachdem die Zeit abgelaufen ist. Vögel ziehen weiter
+    }
+    function throwBall(_event) {
+        console.log("ball werfen");
+        let position = new Endabgabe.Vector(_event.offsetX, _event.offsetY);
+        console.log(throwballArray);
+        for (let ball of throwballArray) {
+            ball.flytoTarget(position);
+        }
+    }
+    function drawBall() {
+        let throwBall = new Endabgabe.ThrowBall();
+        throwballArray.push(throwBall); // ich pushe das element Throwball in den Array
+    }
+    function drawScore() {
+        Endabgabe.crc2.beginPath();
+        Endabgabe.crc2.fillStyle = "black";
+        Endabgabe.crc2.strokeRect(699, 0, 100, 60);
+        Endabgabe.crc2.stroke();
+        Endabgabe.crc2.textBaseline = "alphabetic";
+        Endabgabe.crc2.font = "20px Helvetica";
+        Endabgabe.crc2.fillText("Score:", 700, 40, 100);
+        Endabgabe.crc2.restore();
     }
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=Endabgabe.js.map

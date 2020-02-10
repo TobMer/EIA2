@@ -4,21 +4,25 @@ var Endabgabe;
     class Bird extends Endabgabe.Moveable {
         constructor() {
             super(); // constructor der Superklasse Aufruf!!
+            this.greedy = false; // hungrige birds
             this.colorgrade = 120 - Math.random() * 60;
-            this.radiusBird = 24 + Math.random() * 10;
-            this.color = "HSLA(" + this.colorgrade + ", 100%, 59%, 1)";
+            this.radiusBird = 20 + Math.random() * 10; //Radius der Vogelkörper vorher 24
+            this.color = "HSLA(" + this.colorgrade + ", 100%, 59%, 1)"; //Hue, Saturation, Luminance(Farbton, Sättigung,Helligkeit)
             let x = 800 * Math.random();
             let y = 200 * Math.random();
-            this.scale = 0.7 + Math.random() * 1;
-            console.log("Birds constructor");
+            this.scale = 0.5 + Math.random() * 1; //Insgesamt die Körpergröße
+            //console.log("Birds constructor");
             this.position = new Endabgabe.Vector(x, y); // position DIESES Objekts
-            this.velocity = new Endabgabe.Vector(Math.random() * 2, 0); // WErt für die Geschwindigkeit. Mit new wird ein neues Objekt erstellt. SOzuzsagen ein Bauplan
-            // this.velocity.x = Math.random() * 2 ;
-            this.velocity.y = Math.random() * 1;
-            this.draw(); //Birds werden gezeichnet
+            this.velocity = new Endabgabe.Vector(Math.random() * 2, Math.random() * 1); // WErt für die Geschwindigkeit. Mit new wird ein neues Objekt erstellt. SOzuzsagen ein Bauplan
+            if (Math.random() * 6 <= 1) {
+                console.log("hungrig");
+                this.greedy = true;
+            }
+            //this.draw(); //Birds werden gezeichnet
         }
+        // Die Birds bewegen sich vm linken Bildrand auf über den Bildrand
         move() {
-            console.log("Birds move");
+            //console.log("Birds move");
             this.position.add(this.velocity);
             if (this.position.x > 900)
                 this.position.x = -100;
@@ -27,11 +31,12 @@ var Endabgabe;
         }
         draw() {
             let bird = new Path2D();
-            //crc2.beginPath();
+            Endabgabe.crc2.beginPath();
             Endabgabe.crc2.beginPath();
             Endabgabe.crc2.save();
             Endabgabe.crc2.fillStyle = this.color;
             Endabgabe.crc2.translate(this.position.x, this.position.y);
+            //ab hier rotiert der Körper der Vögel
             bird.ellipse(0, 0, 1 / 2 * this.radiusBird, this.radiusBird, 30, 0, 2 * Math.PI); // Körper der Vögel
             bird.moveTo(-10, 0);
             bird.lineTo(0, -24); //neuen Pfad aufmachen SChnäbel
@@ -46,9 +51,6 @@ var Endabgabe;
             bird.arc(30, -8, (1 / 2) * this.radiusBird, 0, 2 * Math.PI);
             bird.ellipse(5, -5, (1 / 3) * this.radiusBird, this.radiusBird, 13, 0, 2 * Math.PI);
             Endabgabe.crc2.fill(bird);
-            // let farbgrad: number = 120 - Math.random() * 60;
-            // let color: string = "HSLA(" + farbgrad + ", 100%, 59%, 1)";
-            // crc2.fillStyle = color;
             bird = new Path2D();
             //let x: number = this.position.x;
             // let y: number = this.position.y;
@@ -56,6 +58,20 @@ var Endabgabe;
             Endabgabe.crc2.stroke(bird);
             Endabgabe.crc2.restore();
             Endabgabe.crc2.closePath();
+        }
+        flytoTarget(_position) {
+            console.log("TARGET");
+            this.target = _position;
+            let x = (this.target.x - this.position.x) * 0.03; // geschwindigkeit zu dem ziel 
+            let y = (this.target.y - this.position.y) * 0.03;
+            let velocitybird = new Endabgabe.Vector(x, y);
+            this.velocity = velocitybird;
+        }
+        chillontarget() {
+            if (this.target && (this.position == this.target || (this.position.x <= this.target.x + 10 && this.position.y <= this.target.y + 10 && this.position.x >= this.target.x - 10 && this.position.y >= this.target.y - 10))) {
+                this.velocity = new Endabgabe.Vector(0, 0); //Geschwindigkeit der Birds wirds 0 und sie bleiben setehen
+                setTimeout(Endabgabe.flyAway, 2000); // nach ca 2 sekunden fliegen die birds munter weiter
+            }
         }
     }
     Endabgabe.Bird = Bird;

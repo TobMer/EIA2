@@ -216,6 +216,7 @@ var aufgabe10;
             moveable.move(); // 1 ist ein Übergabeparameter
             moveable.draw();
         }
+        //function birdfood ()
     }
 })(aufgabe10 || (aufgabe10 = {}));
 //# sourceMappingURL=aufgabe10.js.map

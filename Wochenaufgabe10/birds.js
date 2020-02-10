@@ -32,6 +32,7 @@ var aufgabe10;
             aufgabe10.crc2.save();
             aufgabe10.crc2.fillStyle = this.color;
             aufgabe10.crc2.translate(this.position.x, this.position.y);
+            aufgabe10.crc2.lineWidth = 1 / this.size;
             bird.ellipse(0, 0, 1 / 2 * this.radiusBird, this.radiusBird, 30, 0, 2 * Math.PI); // Körper der Vögel
             bird.moveTo(-10, 0);
             bird.lineTo(0, -24); //neuen Pfad aufmachen SChnäbel

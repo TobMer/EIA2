@@ -3,13 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Http = require("http");
 const Url = require("url");
 const Mongo = require("mongodb");
-var Endabgabe;
-(function (Endabgabe) {
-    let highscore;
+var MyFuwa_last;
+(function (MyFuwa_last) {
+    let highscores;
     let databaseURL;
     let dbName = "Eia2";
     let dbCollection = "score";
-    databaseURL = "mongodb+srv://Test_Tobias:persia@cluster0-emcuj.mongodb.net/test?retryWrites=true&w=majority";
+    databaseURL = "mongodb+srv://Test_Tobias:<persia>@cluster0-emcuj.mongodb.net/test?retryWrites=true&w=majority";
+    databaseURL = "mongodb://localhost:27017";
     let port = process.env.PORT;
     if (port == undefined)
         port = 5001;
@@ -25,8 +26,8 @@ var Endabgabe;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        highscore = mongoClient.db(dbName).collection(dbCollection);
-        console.log("Database connection is ", highscore != undefined);
+        highscores = mongoClient.db(dbName).collection(dbCollection);
+        console.log("Database connection is ", highscores != undefined);
     }
     async function handleRequest(_request, _response) {
         console.log("What's up?");
@@ -38,7 +39,7 @@ var Endabgabe;
             //     _response.write(key + ":" + url.query[key] + "<br/>");
             // }
             if (url.query["command"] == "retrieve") {
-                let report = await retrievehighscore();
+                let report = await retrievehighscores();
                 if (report == "We encountered tecnical problems. Please try again later")
                     _response.write(report);
                 else
@@ -48,22 +49,25 @@ var Endabgabe;
                 console.log("urlQuery: ", url.query);
                 let jsonString = JSON.stringify(url.query);
                 _response.write(jsonString);
-                highscore.insert(url.query); //sagt was wir in die collection eingetragen werden soll 
-                console.log(jsonString);
+                function storeOrder(_order) {
+                    highscores.insert(_order); // sasgt was in die collection eingetragen werden soll(url.query wird eingetragen)
+                    storeOrder(url.query);
+                    console.log(jsonString);
+                }
             }
+            _response.end();
         }
-        _response.end();
-    }
-    async function retrievehighscore() {
-        // console.log("Asking DB about highscore ", highscore.find());
-        let cursor = await highscore.find();
-        let answer = await cursor.toArray();
-        console.log("DB CursorToArray", answer);
-        if (answer != null) {
-            return answer;
+        async function retrievehighscores() {
+            // console.log("Asking DB about highscores ", highscores.find());
+            let cursor = await highscores.find();
+            let answer = await cursor.toArray();
+            console.log("DB CursorToArray", answer);
+            if (answer != null) {
+                return answer;
+            }
+            else
+                return "We encountered tecnical problems. Please try again later";
         }
-        else
-            return "We encountered tecnical problems. Please try again later";
     }
-})(Endabgabe = exports.Endabgabe || (exports.Endabgabe = {}));
+})(MyFuwa_last = exports.MyFuwa_last || (exports.MyFuwa_last = {}));
 //# sourceMappingURL=server.js.map

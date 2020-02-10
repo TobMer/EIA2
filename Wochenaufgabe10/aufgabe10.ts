@@ -317,7 +317,7 @@ namespace aufgabe10 {
 
         }
     
-        function birdfood ()
+        //function birdfood ()
     }
 
 
