@@ -35,11 +35,12 @@ namespace Endabgabe {
 
         drawSun(new Vector(100, 75));
         drawCloud(new Vector(500, 175), new Vector(250, 150));
+        
         drawSnowman(new Vector(175, 560));
         drawMountains(new Vector(0, crc2.canvas.height * golden), 75, 200, "white", "grey");
         drawMountains(new Vector(0, crc2.canvas.height * golden), 50, 150, "lightgrey", "grey"); //zeichnet nochmal Berge
         //birdfood({ x: 0, y: crc2.canvas.height * golden}, 20, 20, "brown"); // BIRDFOOD
-
+        
         let baum: Tree = new Tree;
         baum.draw();
         drawhat();

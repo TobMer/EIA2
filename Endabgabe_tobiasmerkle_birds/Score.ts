@@ -15,5 +15,7 @@ namespace Endabgabe {
 
         let scorelists: HTMLDivElement = <HTMLDivElement>document.querySelector("div#report");
         scorelists.innerText = responseText;
+
+        
     }
 }

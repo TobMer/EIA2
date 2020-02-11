@@ -5,7 +5,7 @@ namespace Endabgabe {
         transform: DOMMatrix = crc2.getTransform();
         blätter: Path2D = new Path2D();
         maxRadius: number = 66;
-
+        
         constructor() {
             super();
 
