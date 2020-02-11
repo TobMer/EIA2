@@ -347,7 +347,7 @@ var Endabgabe;
             handleSend(name, score);
             //self das es 
         }
-        window.open("https://fiepsonet.herokuapp.com/");
+        window.open("https://tobmer.github.io/EIA2/Endabgabe_tobiasmerkle_birds/Startseite.html", "_self");
     }
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=Endabgabe.js.map

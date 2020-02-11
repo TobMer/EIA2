@@ -503,7 +503,7 @@ namespace Endabgabe {
             //self das es 
 
         }
-        window.open("https://fiepsonet.herokuapp.com/");
+        window.open("https://tobmer.github.io/EIA2/Endabgabe_tobiasmerkle_birds/Startseite.html", "_self");
     }
 
 }
