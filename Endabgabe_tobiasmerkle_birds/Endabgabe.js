@@ -1,11 +1,6 @@
 "use strict";
 var Endabgabe;
 (function (Endabgabe) {
-    /*interface Vector {
-        x: number;
-        y: number;
-
-    }*/
     let score = 0; // Für den Score der Punkteanzahl
     window.addEventListener("load", handleLoad);
     let golden = 0.62; // Der Goldene Schnitt ist bei 0.62
@@ -31,8 +26,6 @@ var Endabgabe;
         baum.draw();
         drawhat();
         drawBirdhouse();
-        //drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
-        //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
         let background = Endabgabe.crc2.getImageData(0, 0, 800, 600);
         window.setInterval(update, 20, background);
         drawScore();
@@ -114,12 +107,6 @@ var Endabgabe;
         Endabgabe.crc2.fill();
         Endabgabe.crc2.restore();
     }
-    /*
-        function zeichneBaum(): void {
-            console.log("Tree");
-    
-        }
-     */
     function drawSnowman(_position) {
         Endabgabe.crc2.save();
         Endabgabe.crc2.translate(_position.x, _position.y);
@@ -147,15 +134,6 @@ var Endabgabe;
         // drawCircle("#000", 3);
         Endabgabe.crc2.restore();
     }
-    // function drawCircle(color: string, radius: number): void {
-    //     crc2.strokeStyle = crc2.fillStyle = color;
-    //     crc2.beginPath();
-    //     crc2.arc(175, 500, radius, 0, Math.PI * 2, true);
-    //     crc2.arc(175, 485, radius, 0, Math.PI * 2, true);
-    //     crc2.arc(175, 470, radius, 0, Math.PI * 2, true);
-    //     crc2.stroke();
-    //     crc2.fill();
-    // }
     function drawhat() {
         Endabgabe.crc2.beginPath();
         Endabgabe.crc2.fillStyle = "black";
@@ -203,19 +181,9 @@ var Endabgabe;
         // crc2.save();
         //crc2.translate(_position.x, _position.y);
         for (let i = 0; i < nBirds; i++) {
-            // crc2.save();
-            // let x: number = Math.random();
-            // let y: number = - Math.random();
-            // crc2.translate(x, y);
-            // crc2.transform(scale, 0, 0, scale, 0, 0);
-            // crc2.restore();
             let bird = new Endabgabe.Bird();
             Endabgabe.moveables.push(bird); // ich pushe die Birds
         }
-        // crc2.restore();
-        // function newFunction(): Path2D {
-        //     return new Path2D();
-        // }
     }
     function drawSnowflake() {
         //console.log("snowflake");
@@ -227,7 +195,7 @@ var Endabgabe;
     }
     function update(_backgroundData) {
         //console.log("Update!");
-        void Endabgabe.crc2.putImageData(_backgroundData, 0, 0);
+        Endabgabe.crc2.putImageData(_backgroundData, 0, 0);
         for (let moveable of Endabgabe.moveables) { // VÖGEL
             moveable.move(); // 1 ist ein Übergabeparameter
             moveable.draw();
@@ -238,7 +206,7 @@ var Endabgabe;
         drawScore();
         for (let moveable of Endabgabe.moveables) { // was passiert hier nochmal
             if (moveable instanceof Endabgabe.Bird) { // es wird mit dem constructor gearbeitet
-                if (moveable.greedy) {
+                if (moveable.greedy) { // hier wird geprüft ob die Birds hungrig sind oder nicht
                     moveable.targetBird();
                 }
             }

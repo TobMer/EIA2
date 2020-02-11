@@ -1,9 +1,5 @@
 namespace Endabgabe {
-    /*interface Vector {
-        x: number;
-        y: number;
 
-    }*/
 
 
     let score: number = 0; // Für den Score der Punkteanzahl
@@ -35,19 +31,18 @@ namespace Endabgabe {
 
         drawSun(new Vector(100, 75));
         drawCloud(new Vector(500, 175), new Vector(250, 150));
-        
+
         drawSnowman(new Vector(175, 560));
         drawMountains(new Vector(0, crc2.canvas.height * golden), 75, 200, "white", "grey");
         drawMountains(new Vector(0, crc2.canvas.height * golden), 50, 150, "lightgrey", "grey"); //zeichnet nochmal Berge
         //birdfood({ x: 0, y: crc2.canvas.height * golden}, 20, 20, "brown"); // BIRDFOOD
-        
+
         let baum: Tree = new Tree;
         baum.draw();
         drawhat();
 
         drawBirdhouse();
-        //drawBirds({ x: 0, y: 500 }, { x: 600, y: 600 });
-        //drawsnowflake({ x: 0, y: 600 }, { x: 800, y: 600 });
+
         let background: ImageData = crc2.getImageData(0, 0, 800, 600);
 
         window.setInterval(update, 20, background);
@@ -160,12 +155,7 @@ namespace Endabgabe {
 
 
     }
-    /* 
-        function zeichneBaum(): void {
-            console.log("Tree");
-    
-        }
-     */
+
 
     function drawSnowman(_position: Vector): void {
 
@@ -202,18 +192,6 @@ namespace Endabgabe {
         crc2.restore();
     }
 
-
-    // function drawCircle(color: string, radius: number): void {
-    //     crc2.strokeStyle = crc2.fillStyle = color;
-    //     crc2.beginPath();
-
-    //     crc2.arc(175, 500, radius, 0, Math.PI * 2, true);
-
-    //     crc2.arc(175, 485, radius, 0, Math.PI * 2, true);
-    //     crc2.arc(175, 470, radius, 0, Math.PI * 2, true);
-    //     crc2.stroke();
-    //     crc2.fill();
-    // }
 
     function drawhat(): void {
 
@@ -284,23 +262,12 @@ namespace Endabgabe {
         //crc2.translate(_position.x, _position.y);
 
         for (let i: number = 0; i < nBirds; i++) {
-            // crc2.save();
-            // let x: number = Math.random();
-            // let y: number = - Math.random();
-            // crc2.translate(x, y);
-            // crc2.transform(scale, 0, 0, scale, 0, 0);
 
-            // crc2.restore();
 
             let bird: Bird = new Bird();
             moveables.push(bird); // ich pushe die Birds
         }
-        // crc2.restore();
 
-
-        // function newFunction(): Path2D {
-        //     return new Path2D();
-        // }
     }
 
     function drawSnowflake(): void {
@@ -320,7 +287,7 @@ namespace Endabgabe {
     function update(_backgroundData: ImageData): void {
         //console.log("Update!");
 
-        void crc2.putImageData(_backgroundData, 0, 0);
+        crc2.putImageData(_backgroundData, 0, 0);
 
         for (let moveable of moveables) {// VÖGEL
             moveable.move(); // 1 ist ein Übergabeparameter
@@ -335,7 +302,7 @@ namespace Endabgabe {
         drawScore();
         for (let moveable of moveables) {// was passiert hier nochmal
             if (moveable instanceof Bird) { // es wird mit dem constructor gearbeitet
-                if (moveable.greedy) {
+                if (moveable.greedy) {// hier wird geprüft ob die Birds hungrig sind oder nicht
                     moveable.targetBird();
                 }
             }
