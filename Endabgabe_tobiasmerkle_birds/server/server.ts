@@ -70,7 +70,7 @@ export namespace Endabgabe {
 
     async function retrievehighscore(): Promise<any[] | string> {
         // console.log("Asking DB about highscore ", highscore.find());
-        let cursor: Mongo.Cursor = await highscore.find();
+        let cursor: Mongo.Cursor = await highscore.find().sort({score: -1});
         let answer: Promise<any[]> = await cursor.toArray();
         console.log("DB CursorToArray", answer);
         if (answer != null) {
