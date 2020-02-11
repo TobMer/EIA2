@@ -8,6 +8,7 @@ var Endabgabe;
                 //setTimeout();
             }
         }
+        //Futter von Birds
         draw() {
             Endabgabe.crc2.beginPath();
             Endabgabe.crc2.save();

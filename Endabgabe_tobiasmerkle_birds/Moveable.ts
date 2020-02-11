@@ -6,6 +6,8 @@ namespace Endabgabe {
         velocity: Vector;
         size: number;
 
+        hitbird: boolean;
+
         constructor() {
 
             //leer , braucht man erst nicht

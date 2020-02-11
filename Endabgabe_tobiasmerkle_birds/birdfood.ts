@@ -18,7 +18,7 @@ namespace Endabgabe {
         }
 
 
-
+        //Futter von Birds
         draw(): void {
 
 

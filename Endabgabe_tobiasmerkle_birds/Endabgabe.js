@@ -11,8 +11,8 @@ var Endabgabe;
     let golden = 0.62; // Der Goldene Schnitt ist bei 0.62
     let url = "https://fiepsonet.herokuapp.com/"; //Link zu dem Programm. Man kommt damit zu der Endabgabe
     let birdfood; //
-    let moveables = []; // neues Array für Moveable, für alle bewegten Objekte
-    console.log(moveables);
+    Endabgabe.moveables = []; // neues Array für Moveable, für alle bewegten Objekte
+    console.log(Endabgabe.moveables);
     let throwballArray = [];
     let birdfoodsArray = []; // Array für das Bird Food und mit birdfoodsArray kann number gepusht werden
     function handleLoad(_event) {
@@ -41,6 +41,7 @@ var Endabgabe;
         drawBall();
         window.addEventListener("auxclick", throwFood); //WErfe Futter
         window.addEventListener("click", throwBall); // Werfe Ball
+        window.setTimeout(handleEnd, 20000);
     }
     //HIntergrund
     function drawbackground() {
@@ -209,7 +210,7 @@ var Endabgabe;
             // crc2.transform(scale, 0, 0, scale, 0, 0);
             // crc2.restore();
             let bird = new Endabgabe.Bird();
-            moveables.push(bird); // ich pushe die Birds
+            Endabgabe.moveables.push(bird); // ich pushe die Birds
         }
         // crc2.restore();
         // function newFunction(): Path2D {
@@ -221,35 +222,48 @@ var Endabgabe;
         let nSnowflake = 120;
         for (let i = 0; i < nSnowflake; i++) {
             let snowflake = new Endabgabe.Snowflake();
-            moveables.push(snowflake); // snowflake wird in moveable array reingepusht
+            Endabgabe.moveables.push(snowflake); // snowflake wird in moveable array reingepusht
         }
     }
     function update(_backgroundData) {
         //console.log("Update!");
         void Endabgabe.crc2.putImageData(_backgroundData, 0, 0);
-        for (let moveable of moveables) { // VÖGEL
+        for (let moveable of Endabgabe.moveables) { // VÖGEL
             moveable.move(); // 1 ist ein Übergabeparameter
             moveable.draw();
         }
         for (let birdfood of birdfoodsArray) {
             birdfood.draw(); //Birdfood wird immer wieder geupdtatet
         }
-        for (let moveable of moveables) { // was passiert hier nochmal
+        drawScore();
+        for (let moveable of Endabgabe.moveables) { // was passiert hier nochmal
             if (moveable instanceof Endabgabe.Bird) { // es wird mit dem constructor gearbeitet
                 if (moveable.greedy) {
-                    moveable.chillontarget();
+                    moveable.targetBird();
                 }
             }
-            drawScore();
         }
         for (let throwBall of throwballArray) {
             throwBall.update();
         }
+        for (let throwBall of throwballArray) {
+            throwBall.chillontarget();
+        }
+        for (let i = 0; i < Endabgabe.moveables.length; i++) {
+            if (Endabgabe.moveables[i] instanceof Endabgabe.Bird) {
+                if (Endabgabe.moveables[i].hitbird) {
+                    console.log("vogel getroffen");
+                    Endabgabe.moveables.splice(i, 1); //Die Schleife geht in die Moveables durch, da sind Snowflakes und Birds. ist Birds ein i und wird getroffen dann wird er Bird mit dem wert i rausgelöscht
+                    score += 10;
+                    console.log("vogel gelöscht");
+                }
+            }
+        }
     }
     function throwFood(_event) {
         console.log(_event);
-        let birdDestination = new Endabgabe.Vector(_event.clientX, _event.clientY);
-        for (let moveable of moveables) {
+        let birdDestination = new Endabgabe.Vector(_event.clientX, _event.clientY - 70);
+        for (let moveable of Endabgabe.moveables) {
             if (moveable instanceof Endabgabe.Bird) {
                 if (moveable.greedy) {
                     moveable.flytoTarget(birdDestination);
@@ -271,7 +285,7 @@ var Endabgabe;
         setTimeout(deleteFood, 2000);
     }
     function flyAway() {
-        for (let moveable of moveables) {
+        for (let moveable of Endabgabe.moveables) {
             if (moveable instanceof Endabgabe.Bird) { //Moveable array wird durchgegangen und es wird BIRD KLasse geprüft und wenn JA, wird die eigenschaft Greedy geürpft aber sie ist true und dann kriegt er seine ursprümgliche Velocity 
                 if (moveable.greedy) {
                     if (Math.random() * 8 < 0.6) { // nach einiger ZEit fliegne die Vögel weg und haben die lgeiche Velocity
@@ -287,10 +301,17 @@ var Endabgabe;
     }
     function throwBall(_event) {
         console.log("ball werfen");
-        let position = new Endabgabe.Vector(_event.offsetX, _event.offsetY);
+        let position = new Endabgabe.Vector(_event.clientX, _event.clientY - 70);
         console.log(throwballArray);
         for (let ball of throwballArray) {
             ball.flytoTarget(position);
+        }
+        let ballIsHere = false; // der ball wird geprüft ob er da ist
+        if (throwballArray.length >= 1) {
+            ballIsHere = true;
+        }
+        if (ballIsHere == false) {
+            drawBall();
         }
     }
     function drawBall() {
@@ -304,8 +325,29 @@ var Endabgabe;
         Endabgabe.crc2.stroke();
         Endabgabe.crc2.textBaseline = "alphabetic";
         Endabgabe.crc2.font = "20px Helvetica";
-        Endabgabe.crc2.fillText("Score:", 700, 40, 100);
+        Endabgabe.crc2.fillText("Score: " + score, 700, 40, 100);
         Endabgabe.crc2.restore();
+    }
+    function removeball() {
+        console.log("ballweg");
+        if (throwballArray.length > 0) {
+            throwballArray.splice(0, 1);
+        }
+    }
+    Endabgabe.removeball = removeball;
+    function handleSend(_name, _score) {
+        let query = "score=" + _score + "&name=" + _name;
+        let response = fetch(url + "?" + query);
+        //let responseText: Promise<string> = response.text();
+        alert(response);
+    }
+    function handleEnd() {
+        let name = prompt("Your Score " + score, "Please enter your name"); //Zur Datenbank und zur Startseite!!
+        if (name != null) {
+            handleSend(name, score);
+            //self das es 
+        }
+        window.open("https://fiepsonet.herokuapp.com/");
     }
 })(Endabgabe || (Endabgabe = {}));
 //# sourceMappingURL=Endabgabe.js.map

@@ -1,7 +1,7 @@
 "use strict";
 var Endabgabe;
 (function (Endabgabe) {
-    class Tree extends Endabgabe.Object {
+    class Tree extends Object {
         constructor() {
             super();
             this.blätterZahl = 70;

@@ -1,17 +1,19 @@
-namespace Endabgabe {
+// namespace Endabgabe {
+//     window.addEventListener("load", handleLoad);
 
-    export class Object {
+//     let url: string = "https://fiepsonet.herokuapp.com/";
 
-        gradient: CanvasGradient;
-        position: Vector;
-        scale: Number;
-        x: number;
-        y: number;
+//     function handleLoad(_event: Event): void {
+//     document.getElementById("Highscoreliste").addEventListener("click", handleRetriveHS);
 
-        constructor() {
+//     }
 
-            this.scale = 0.7 + Math.random() * 1;
-        }
-        draw(): void {}
-    }
-}
+//     async function handleRetriveHS(_event: Event): Promise<void> {
+//         //let query: string = "command=retrieve";
+//         //let response: Response = await fetch(url + "?" + query);
+//         //let responseText: string = await response.text();
+
+//         // let highscorelists: HTMLDivElement = <HTMLDivElement>document.querySelector("div#report");
+//         // highscorelists.innerText = responseText;
+//     }
+// }

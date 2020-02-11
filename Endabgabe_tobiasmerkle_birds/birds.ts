@@ -10,6 +10,8 @@ namespace Endabgabe {
         scale: number;
         greedy: boolean = false; // hungrige birds
         target: Vector;
+        hitbird: boolean; //getroffener vogel
+
 
 
         constructor() {
@@ -25,7 +27,7 @@ namespace Endabgabe {
             this.position = new Vector(x, y); // position DIESES Objekts
             this.velocity = new Vector(Math.random() * 2, Math.random() * 1); // WErt für die Geschwindigkeit. Mit new wird ein neues Objekt erstellt. SOzuzsagen ein Bauplan
 
-           
+
 
             if (Math.random() * 6 <= 1) {
                 console.log("hungrig");
@@ -38,7 +40,7 @@ namespace Endabgabe {
         }
 
         // Die Birds bewegen sich vm linken Bildrand auf über den Bildrand
-        move(): void {
+            move(): void {
             //console.log("Birds move");
             this.position.add(this.velocity);
 
@@ -85,10 +87,6 @@ namespace Endabgabe {
             crc2.fill(bird);
 
 
-
-
-
-
             bird = new Path2D();
             //let x: number = this.position.x;
             // let y: number = this.position.y;
@@ -114,14 +112,24 @@ namespace Endabgabe {
             this.velocity = velocitybird;
 
         }
-        chillontarget(): void {
+        
+
+        targetBird(): void {
 
             if (this.target && (this.position == this.target || (this.position.x <= this.target.x + 10 && this.position.y <= this.target.y + 10 && this.position.x >= this.target.x - 10 && this.position.y >= this.target.y - 10))) {
                 this.velocity = new Vector(0, 0); //Geschwindigkeit der Birds wirds 0 und sie bleiben setehen
 
-                setTimeout(flyAway, 2000); // nach ca 2 sekunden fliegen die birds munter weiter
+
             }
+            setTimeout(flyAway, 4000);
         }
 
+        shootBird(_position: Vector): void {
+            this.target = _position;
+            if (this.target && (this.position == this.target || (this.position.x <= this.target.x + 30 && this.position.y <= this.target.y + 30 && this.position.x >= this.target.x - 30 && this.position.y >= this.target.y - 30))) {
+                this.hitbird = true; // if Bedingung ist erfüllt wenn Vogel an dieser Position ist oder wenn dort geklickt wurde
+                console.log("Bin ich getroffen? " + this.hitbird);
+            }
+        }
     }
 }

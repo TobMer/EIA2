@@ -52,14 +52,28 @@ namespace Endabgabe {
         update(): void {
             this.move();
             this.draw();
+
         }
 
         move(): void {
             this.position.add(this.velocity);
+
+        }
+
+        chillontarget(): void {
+
+            if (this.target && (this.position == this.target || (this.position.x <= this.target.x + 10 && this.position.y <= this.target.y + 10 && this.position.x >= this.target.x - 10 && this.position.y >= this.target.y - 10))) {
+                this.velocity = new Vector(0, 0);
+
+                setTimeout(removeball, 500);
+
+                for (let moveable of moveables) {
+                    if (moveable instanceof Bird) {
+                        moveable.shootBird(this.target);
+                    }
+
+                }
+            }
         }
     }
-
-
-
-
 }

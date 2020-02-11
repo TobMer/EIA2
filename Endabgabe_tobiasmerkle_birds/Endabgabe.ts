@@ -16,10 +16,10 @@ namespace Endabgabe {
 
 
     let birdfood: Birdfood; //
-   
-    let moveables: Moveable[] = []; // neues Array für Moveable, für alle bewegten Objekte
+
+    export let moveables: Moveable[] = []; // neues Array für Moveable, für alle bewegten Objekte
     console.log(moveables);
-   
+
     let throwballArray: ThrowBall[] = [];
     let birdfoodsArray: Birdfood[] = []; // Array für das Bird Food und mit birdfoodsArray kann number gepusht werden
 
@@ -55,9 +55,10 @@ namespace Endabgabe {
         drawSnowflake();
         createBirds();
         drawBall();
-        
+
         window.addEventListener("auxclick", throwFood); //WErfe Futter
         window.addEventListener("click", throwBall); // Werfe Ball
+        window.setTimeout(handleEnd, 20000);
     }
 
     //HIntergrund
@@ -73,6 +74,7 @@ namespace Endabgabe {
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
 
     }
+
 
 
     function drawSun(_position: Vector): void {
@@ -137,11 +139,14 @@ namespace Endabgabe {
         crc2.beginPath();
         crc2.moveTo(0, 0);
         crc2.lineTo(0, -_max);
+
         do {
             x += stepMin + Math.random() * (stepMax - stepMin);
             let y: number = -_min - Math.random() * (_max - _min);
             crc2.lineTo(x, y);
-        } while (x < crc2.canvas.width);
+        }
+
+        while (x < crc2.canvas.width);
         crc2.lineTo(x, 0);
         crc2.closePath();
         let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, -_max);
@@ -317,41 +322,55 @@ namespace Endabgabe {
         void crc2.putImageData(_backgroundData, 0, 0);
 
         for (let moveable of moveables) {// VÖGEL
-
             moveable.move(); // 1 ist ein Übergabeparameter
             moveable.draw();
         }
 
         for (let birdfood of birdfoodsArray) {
-
             birdfood.draw(); //Birdfood wird immer wieder geupdtatet
         }
 
+
+        drawScore();
         for (let moveable of moveables) {// was passiert hier nochmal
-
             if (moveable instanceof Bird) { // es wird mit dem constructor gearbeitet
-
                 if (moveable.greedy) {
-                    moveable.chillontarget();
-
+                    moveable.targetBird();
                 }
-
             }
-            drawScore();
-
         }
 
 
         for (let throwBall of throwballArray) {
-
             throwBall.update();
+        }
+
+        for (let throwBall of throwballArray) {
+            throwBall.chillontarget();
+        }
+
+        for (let i: number = 0; i < moveables.length; i++) {
+
+            if (moveables[i] instanceof Bird) {
+
+                if (moveables[i].hitbird) {
+                    console.log("vogel getroffen");
+                    moveables.splice(i, 1); //Die Schleife geht in die Moveables durch, da sind Snowflakes und Birds. ist Birds ein i und wird getroffen dann wird er Bird mit dem wert i rausgelöscht
+                    
+                    score += 10;
+
+                    console.log("vogel gelöscht");
+                }
+            }
 
         }
     }
 
+
+
     function throwFood(_event: MouseEvent): void {
         console.log(_event);
-        let birdDestination: Vector = new Vector(_event.clientX, _event.clientY);
+        let birdDestination: Vector = new Vector(_event.clientX, _event.clientY - 70);
 
         for (let moveable of moveables) {
 
@@ -366,11 +385,7 @@ namespace Endabgabe {
         }
 
         drawfood(birdDestination, new Vector(100, 100)); //Food wird in Array gepusht, gespeichert
-
-
-
-
-
+        
     }
 
 
@@ -422,21 +437,28 @@ namespace Endabgabe {
 
     function throwBall(_event: MouseEvent): void {
         console.log("ball werfen");
-        let position: Vector = new Vector(_event.offsetX, _event.offsetY);
+        let position: Vector = new Vector(_event.clientX, _event.clientY - 70);
         console.log(throwballArray);
         for (let ball of throwballArray) {
             ball.flytoTarget(position);
+        }
 
- 
+        let ballIsHere: boolean = false; // der ball wird geprüft ob er da ist
+
+        if (throwballArray.length >= 1) {
+            ballIsHere = true;
+        }
+
+        if (ballIsHere == false) {
+            drawBall();
         }
 
 
-        
 
     }
 
     function drawBall(): void {
-       
+
         let throwBall: ThrowBall = new ThrowBall();
         throwballArray.push(throwBall); // ich pushe das element Throwball in den Array
 
@@ -453,12 +475,35 @@ namespace Endabgabe {
         crc2.stroke();
         crc2.textBaseline = "alphabetic";
         crc2.font = "20px Helvetica";
-        crc2.fillText("Score:", 700, 40, 100);
+        crc2.fillText("Score: " + score, 700, 40, 100);
 
         crc2.restore();
+    }
 
+    export function removeball(): void {
+        console.log("ballweg");
 
+        if (throwballArray.length > 0) {
+            throwballArray.splice(0, 1);
 
+        }
+
+    }
+    function handleSend(_name: string, _score: number): void {
+        let query: string = "score=" + _score + "&name=" + _name;
+        let response: Promise<Response> = fetch(url + "?" + query);
+        //let responseText: Promise<string> = response.text();
+        alert(response);
+    }
+
+    function handleEnd(): void {
+        let name: any = prompt("Your Score " + score, "Please enter your name"); //Zur Datenbank und zur Startseite!!
+        if (name != null) {
+            handleSend(name, score);
+            //self das es 
+
+        }
+        window.open("https://fiepsonet.herokuapp.com/");
     }
 
 }

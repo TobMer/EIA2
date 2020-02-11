@@ -67,10 +67,17 @@ var Endabgabe;
             let velocitybird = new Endabgabe.Vector(x, y);
             this.velocity = velocitybird;
         }
-        chillontarget() {
+        targetBird() {
             if (this.target && (this.position == this.target || (this.position.x <= this.target.x + 10 && this.position.y <= this.target.y + 10 && this.position.x >= this.target.x - 10 && this.position.y >= this.target.y - 10))) {
                 this.velocity = new Endabgabe.Vector(0, 0); //Geschwindigkeit der Birds wirds 0 und sie bleiben setehen
-                setTimeout(Endabgabe.flyAway, 2000); // nach ca 2 sekunden fliegen die birds munter weiter
+            }
+            setTimeout(Endabgabe.flyAway, 4000);
+        }
+        shootBird(_position) {
+            this.target = _position;
+            if (this.target && (this.position == this.target || (this.position.x <= this.target.x + 30 && this.position.y <= this.target.y + 30 && this.position.x >= this.target.x - 30 && this.position.y >= this.target.y - 30))) {
+                this.hitbird = true; // if Bedingung ist erfüllt wenn Vogel an dieser Position ist oder wenn dort geklickt wurde
+                console.log("Bin ich getroffen? " + this.hitbird);
             }
         }
     }

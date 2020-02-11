@@ -35,6 +35,17 @@ var Endabgabe;
         move() {
             this.position.add(this.velocity);
         }
+        chillontarget() {
+            if (this.target && (this.position == this.target || (this.position.x <= this.target.x + 10 && this.position.y <= this.target.y + 10 && this.position.x >= this.target.x - 10 && this.position.y >= this.target.y - 10))) {
+                this.velocity = new Endabgabe.Vector(0, 0);
+                setTimeout(Endabgabe.removeball, 500);
+                for (let moveable of Endabgabe.moveables) {
+                    if (moveable instanceof Endabgabe.Bird) {
+                        moveable.shootBird(this.target);
+                    }
+                }
+            }
+        }
     }
     Endabgabe.ThrowBall = ThrowBall;
 })(Endabgabe || (Endabgabe = {}));
