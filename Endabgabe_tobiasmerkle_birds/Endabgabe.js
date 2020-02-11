@@ -342,7 +342,7 @@ var Endabgabe;
         alert(response);
     }
     function handleEnd() {
-        let name = prompt("Your Score " + score, "Please enter your name"); //Zur Datenbank und zur Startseite!!
+        let name = prompt("Deine Punkte " + score, "Trage deinen Namen für die Highscore Liste ein"); //Zur Datenbank und zur Startseite!!
         if (name != null) {
             handleSend(name, score);
             //self das es 

@@ -356,7 +356,7 @@ namespace Endabgabe {
                 if (moveables[i].hitbird) {
                     console.log("vogel getroffen");
                     moveables.splice(i, 1); //Die Schleife geht in die Moveables durch, da sind Snowflakes und Birds. ist Birds ein i und wird getroffen dann wird er Bird mit dem wert i rausgelöscht
-                    
+
                     score += 10;
 
                     console.log("vogel gelöscht");
@@ -385,7 +385,7 @@ namespace Endabgabe {
         }
 
         drawfood(birdDestination, new Vector(100, 100)); //Food wird in Array gepusht, gespeichert
-        
+
     }
 
 
@@ -497,7 +497,7 @@ namespace Endabgabe {
     }
 
     function handleEnd(): void {
-        let name: any = prompt("Your Score " + score, "Please enter your name"); //Zur Datenbank und zur Startseite!!
+        let name: any = prompt("Deine Punkte " + score, "Trage deinen Namen für die Highscore Liste ein"); //Zur Datenbank und zur Startseite!!
         if (name != null) {
             handleSend(name, score);
             //self das es 

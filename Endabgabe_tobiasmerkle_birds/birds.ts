@@ -63,7 +63,7 @@ namespace Endabgabe {
 
             crc2.fillStyle = this.color;
             crc2.translate(this.position.x, this.position.y);
-            //ab hier rotiert der Körper der Vögel
+            
             bird.ellipse(0, 0, 1 / 2 * this.radiusBird, this.radiusBird, 30, 0, 2 * Math.PI); // Körper der Vögel
             bird.moveTo(-10, 0);
             bird.lineTo(0, -24); //neuen Pfad aufmachen SChnäbel
@@ -119,9 +119,9 @@ namespace Endabgabe {
             if (this.target && (this.position == this.target || (this.position.x <= this.target.x + 10 && this.position.y <= this.target.y + 10 && this.position.x >= this.target.x - 10 && this.position.y >= this.target.y - 10))) {
                 this.velocity = new Vector(0, 0); //Geschwindigkeit der Birds wirds 0 und sie bleiben setehen
 
-
+                setTimeout(flyAway, 4000); //in der if bedingung
             }
-            setTimeout(flyAway, 4000);
+            
         }
 
         shootBird(_position: Vector): void {

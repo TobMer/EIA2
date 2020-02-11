@@ -1,0 +1,42 @@
+ 
+    h1 {
+    text-align: center;
+    position: relative;
+    color: yellow;
+}
+
+
+
+ 
+    body {
+    
+    color: #FFFFFF;
+    background: #00bfff;
+
+    font-family: monospace; }
+ 
+    #start {
+        text-align: center;
+    }
+
+    button {
+   
+    width: 120px; 
+    height: 25px; 
+    border: 1px solid #aaa; 
+    border-radius: 5px; 
+    background: #eee;
+    background-image: linear-gradient(#cdffbc, #6ec153); 
+    display: inline-block; 
+    text-align: center;
+    text-decoration: none; 
+    color: #333; 
+ 
+    }
+
+    p{
+
+        font-size: 2em;
+    }
+
+    

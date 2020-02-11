@@ -1,6 +1,6 @@
 namespace Endabgabe {
 
-    export class ThrowBall {
+    export class ThrowBall extends Moveable {
 
         color: string;
         scale: number;
@@ -10,6 +10,7 @@ namespace Endabgabe {
         velocity: Vector;
 
         constructor() {
+            super();
             this.position = new Vector(400, 550);
 
             this.velocity = new Vector(0, 0);

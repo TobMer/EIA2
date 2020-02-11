@@ -1,8 +1,9 @@
 "use strict";
 var Endabgabe;
 (function (Endabgabe) {
-    class ThrowBall {
+    class ThrowBall extends Endabgabe.Moveable {
         constructor() {
+            super();
             this.position = new Endabgabe.Vector(400, 550);
             this.velocity = new Endabgabe.Vector(0, 0);
         }
